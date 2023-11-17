@@ -1,4 +1,4 @@
-# [RO] Licenta/Disertatie 2023
+# [RO] Licenta/Disertatie 2024
 
 Scopul acestui depozit este colectarea lucrariilor de licenta.
 
