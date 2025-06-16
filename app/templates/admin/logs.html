@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="content-container admin-page">
+    <div class="page-header">
+        <h1>{{ _('Admin Activity Logs') }}</h1>
+        <div class="header-actions">
+            <a href="{{ url_for('admin.index') }}" class="btn secondary">{{ _('Back to Dashboard') }}</a>
+        </div>
+    </div>
+    
+    <div class="admin-filters">
+        <form id="filter-form" method="GET" action="{{ url_for('admin.logs') }}">
+            <div class="filter-group">
+                <label for="action-filter">{{ _('Action Type') }}</label>
+                <select id="action-filter" name="action">
+                    <option value="">{{ _('All Actions') }}</option>
+                    <option value="approved_location" {% if request.args.get('action') == 'approved_location' %}selected{% endif %}>{{ _('Location Approval') }}</option>
+                    <option value="rejected_location" {% if request.args.get('action') == 'rejected_location' %}selected{% endif %}>{{ _('Location Rejection') }}</option>
+                    <option value="edited_location" {% if request.args.get('action') == 'edited_location' %}selected{% endif %}>{{ _('Location Edit') }}</option>
+                    <option value="granted_admin" {% if request.args.get('action') == 'granted_admin' %}selected{% endif %}>{{ _('Admin Grant') }}</option>
+                    <option value="revoked_admin" {% if request.args.get('action') == 'revoked_admin' %}selected{% endif %}>{{ _('Admin Revoke') }}</option>
+                    <option value="activated_user" {% if request.args.get('action') == 'activated_user' %}selected{% endif %}>{{ _('User Activation') }}</option>
+                    <option value="deactivated_user" {% if request.args.get('action') == 'deactivated_user' %}selected{% endif %}>{{ _('User Deactivation') }}</option>
+                    <option value="deleted_review" {% if request.args.get('action') == 'deleted_review' %}selected{% endif %}>{{ _('Review Deletion') }}</option>
+                    <option value="deleted_photo" {% if request.args.get('action') == 'deleted_photo' %}selected{% endif %}>{{ _('Photo Deletion') }}</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label for="admin-filter">{{ _('Admin User') }}</label>
+                <select id="admin-filter" name="admin_id">
+                    <option value="">{{ _('All Admins') }}</option>
+                    {% for admin in admins %}
+                        <option value="{{ admin.id }}" {% if request.args.get('admin_id')|int == admin.id %}selected{% endif %}>{{ admin.username }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            <div class="filter-group date-range">
+                <label>{{ _('Date Range') }}</label>
+                <div class="date-inputs">
+                    <input type="date" name="start_date" value="{{ request.args.get('start_date', '') }}" placeholder="{{ _('Start date') }}">
+                    <span class="date-separator">{{ _('to') }}</span>
+                    <input type="date" name="end_date" value="{{ request.args.get('end_date', '') }}" placeholder="{{ _('End date') }}">
+                </div>
+            </div>
+            
+            <div class="filter-actions">
+                <button type="submit" class="btn primary">{{ _('Filter') }}</button>
+                <a href="{{ url_for('admin.logs') }}" class="btn text">{{ _('Clear Filters') }}</a>
+            </div>
+        </form>
+    </div>
+    
+    <div class="admin-content">
+        <div class="data-table-container">
+            {% if logs %}
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>{{ _('Action') }}</th>
+                            <th>{{ _('Admin') }}</th>
+                            <th>{{ _('IP Address') }}</th>
+                            <th>{{ _('Details') }}</th>
+                            <th>{{ _('Timestamp') }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for log in logs %}
+                            <tr>
+                                <td>
+                                    <span class="log-action 
+                                    {% if 'approved' in log.action %}success-action
+                                    {% elif 'rejected' in log.action or 'deleted' in log.action or 'revoked' in log.action or 'deactivated' in log.action %}danger-action
+                                    {% elif 'edited' in log.action or 'granted' in log.action or 'activated' in log.action %}warning-action
+                                    {% endif %}">
+                                        {{ log.action|replace('_', ' ')|capitalize }}
+                                    </span>
+                                </td>
+                                <td>{{ log.admin.username }}</td>
+                                <td><code>{{ log.ip_address }}</code></td>
+                                <td>{{ log.details }}</td>
+                                <td>{{ log.timestamp.strftime('%d %b %Y, %H:%M:%S') }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                
+                <!-- Pagination -->
+                {% if pagination %}
+                    <div class="pagination">
+                        {% if pagination.has_prev %}
+                            <a href="{{ url_for('admin.logs', page=pagination.prev_num, **request.args) }}" class="btn secondary">{{ _('Previous') }}</a>
+                        {% endif %}
+                        
+                        <span class="pagination-info">
+                            {{ _('Page %(current)s of %(total)s', current=pagination.page, total=pagination.pages) }}
+                        </span>
+                        
+                        {% if pagination.has_next %}
+                            <a href="{{ url_for('admin.logs', page=pagination.next_num, **request.args) }}" class="btn secondary">{{ _('Next') }}</a>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            {% else %}
+                <div class="no-data">
+                    <p>{{ _('No admin activity logs found matching your criteria.') }}</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Auto-submit filters on change
+        const actionFilter = document.getElementById('action-filter');
+        const adminFilter = document.getElementById('admin-filter');
+        
+        if (actionFilter) {
+            actionFilter.addEventListener('change', function() {
+                document.getElementById('filter-form').submit();
+            });
+        }
+        
+        if (adminFilter) {
+            adminFilter.addEventListener('change', function() {
+                document.getElementById('filter-form').submit();
+            });
+        }
+    });
+</script>
+{% endblock %}

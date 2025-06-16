@@ -1,0 +1,305 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="map-container">
+    <!-- Map controls sidebar -->
+    <div class="sidebar controls-sidebar">
+        <div class="sidebar-content">
+            <h2>{{ _('Find Accessible Locations') }}</h2>
+            
+            <!-- Search box -->
+            <div class="search-container">
+                <input type="text" id="location-search" placeholder="{{ _('Search for a location...') }}" 
+                       aria-label="{{ _('Search for a location') }}">
+                <button class="search-btn" aria-label="{{ _('Search') }}">
+                    <span class="search-icon"></span>
+                </button>
+                <div id="search-results" class="search-results" aria-live="polite"></div>
+            </div>
+            
+            <!-- Accessibility filters -->
+            <div class="filter-section">
+                <h3>{{ _('Accessibility Needs') }}</h3>
+                <div class="filter-buttons">
+                    <button class="filter-btn" data-filter="wheelchair" aria-pressed="false">
+                        <span class="filter-icon wheelchair"></span>
+                        <span class="filter-label">{{ _('Wheelchair') }}</span>
+                    </button>
+                    <button class="filter-btn" data-filter="visual" aria-pressed="false">
+                        <span class="filter-icon visual"></span>
+                        <span class="filter-label">{{ _('Visual') }}</span>
+                    </button>
+                    <button class="filter-btn" data-filter="hearing" aria-pressed="false">
+                        <span class="filter-icon hearing"></span>
+                        <span class="filter-label">{{ _('Hearing') }}</span>
+                    </button>
+                    <button class="filter-btn" data-filter="cognitive" aria-pressed="false">
+                        <span class="filter-icon cognitive"></span>
+                        <span class="filter-label">{{ _('Cognitive') }}</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Location type filters -->
+            <div class="filter-section">
+                <h3>{{ _('Location Types') }}</h3>
+                <div class="type-filters">
+                    <label class="checkbox-label">
+                        <input type="checkbox" class="type-filter" data-type="restaurant">
+                        <span>{{ _('Restaurants') }}</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" class="type-filter" data-type="cafe">
+                        <span>{{ _('Cafés') }}</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" class="type-filter" data-type="shop">
+                        <span>{{ _('Shops') }}</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" class="type-filter" data-type="attraction">
+                        <span>{{ _('Attractions') }}</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" class="type-filter" data-type="publicbuilding">
+                        <span>{{ _('Public Buildings') }}</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" class="type-filter" data-type="transportation">
+                        <span>{{ _('Transportation') }}</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" class="type-filter" data-type="healthcare">
+                        <span>{{ _('Healthcare') }}</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" class="type-filter" data-type="other">
+                        <span>{{ _('Other') }}</span>
+                   </label>
+                </div>
+            </div>
+            
+            <!-- Add location button -->
+            {% if current_user.is_authenticated %}
+            <div class="action-buttons">
+                <button id="add-location-btn" class="btn primary">
+                    <span class="add-icon"></span>
+                    {{ _('Add New Location') }}
+                </button>
+            </div>
+            {% else %}
+            <div class="login-prompt">
+                <p>{{ _('Please') }} <a href="{{ url_for('auth.login') }}">{{ _('log in') }}</a> {{ _('to add new locations.') }}</p>
+            </div>
+            {% endif %}
+            
+            <!-- Legend -->
+            <div class="legend">
+                <h3>{{ _('Map Legend') }}</h3>
+                <ul>
+                    <li>
+                        <span class="legend-icon wheelchair"></span>
+                        <span>{{ _('Wheelchair Accessible') }}</span>
+                    </li>
+                    <li>
+                        <span class="legend-icon visual"></span>
+                        <span>{{ _('Visual Assistance') }}</span>
+                    </li>
+                    <li>
+                        <span class="legend-icon pending"></span>
+                        <span>{{ _('Pending Approval') }}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <!-- The map -->
+    <div id="map" aria-label="{{ _('Accessibility map of Timisoara') }}"></div>
+    
+    <!-- Location details sidebar (hidden by default) -->
+    <div id="location-details" class="sidebar details-sidebar">
+        <!-- Content will be loaded dynamically -->
+    </div>
+    
+    <!-- Add location form sidebar (hidden by default) -->
+    <div id="add-location-form" class="sidebar form-sidebar">
+        <div class="sidebar-content">
+            <button class="close-sidebar" aria-label="{{ _('Close form') }}">&times;</button>
+            
+            <h2>{{ _('Add New Accessible Location') }}</h2>
+            
+            <form action="{{ url_for('main.submit_location') }}" method="POST" enctype="multipart/form-data">
+                
+                
+                <!-- Location details fieldset -->
+                <fieldset>
+                    <legend>{{ _('Location Details') }}</legend>
+                    
+                    <div class="form-group">
+                        <label for="name">{{ _('Name') }} *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="description">{{ _('Description') }}</label>
+                        <textarea id="description" name="description" rows="3"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="address">{{ _('Address') }}</label>
+                        <input type="text" id="address" name="address">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="location_type">{{ _('Location Type') }}</label>
+                        <select id="location_type" name="location_type">
+                            <option value="">{{ _('-- Select Type --') }}</option>
+                            <option value="restaurant">{{ _('Restaurant') }}</option>
+                            <option value="cafe">{{ _('Café') }}</option>
+                            <option value="shop">{{ _('Shop') }}</option>
+                            <option value="attraction">{{ _('Attraction') }}</option>
+                            <option value="publicbuilding">{{ _('Public Building') }}</option>
+                            <option value="transportation">{{ _('Transportation') }}</option>
+                            <option value="healthcare">{{ _('Healthcare') }}</option>
+                            <option value="other">{{ _('Other') }}</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Coordinates (hidden, will be populated automatically) -->
+                    <input type="hidden" id="lat" name="lat" required>
+                    <input type="hidden" id="lng" name="lng" required>
+                </fieldset>
+                
+                <!-- Accessibility features fieldset -->
+                <fieldset>
+                    <legend>{{ _('Accessibility Features') }}</legend>
+                    
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="has_ramp" name="has_ramp">
+                            <span>{{ _('Has wheelchair ramp') }}</span>
+                        </label>
+                        
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="has_accessible_wc" name="has_accessible_wc">
+                            <span>{{ _('Has accessible toilet') }}</span>
+                        </label>
+                        
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="has_accessible_parking" name="has_accessible_parking">
+                            <span>{{ _('Has accessible parking') }}</span>
+                        </label>
+                        
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="has_accessible_entrance" name="has_accessible_entrance">
+                            <span>{{ _('Has accessible entrance') }}</span>
+                        </label>
+                        
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="has_braille" name="has_braille">
+                            <span>{{ _('Has braille signage') }}</span>
+                        </label>
+                        
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="has_audio_guidance" name="has_audio_guidance">
+                            <span>{{ _('Has audio guidance') }}</span>
+                        </label>
+                        
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="has_staff_assistance" name="has_staff_assistance">
+                            <span>{{ _('Has trained staff assistance') }}</span>
+                        </label>
+                    </div>
+                </fieldset>
+                
+                <!-- Photos fieldset -->
+                <fieldset>
+                    <legend>{{ _('Photos') }}</legend>
+                    
+                    <div class="form-group">
+                        <label for="photos">{{ _('Upload Photos (Max 3)') }}</label>
+                        <input type="file" id="photos" name="photos" accept="image/jpeg,image/png" multiple>
+                        <small class="help-text">{{ _('Max 5MB per photo. JPEG or PNG only.') }}</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="photo_description">{{ _('Photo Description') }}</label>
+                        <input type="text" id="photo_description" name="photo_description" placeholder="{{ _('Describe what the photos show') }}">
+                    </div>
+                </fieldset>
+                
+                <!-- Submit button -->
+                <div class="form-actions">
+                    <button type="submit" class="btn primary">{{ _('Submit Location') }}</button>
+                    <button type="button" class="btn secondary close-form">{{ _('Cancel') }}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/map.js') }}"></script>
+<script>
+    // Initialize form close button
+    document.addEventListener('DOMContentLoaded', function() {
+        const closeButtons = document.querySelectorAll('.close-sidebar, .close-form');
+        closeButtons.forEach(function(button) {
+            button.addEventListener('click', function() {
+                const sidebar = this.closest('.sidebar');
+                if (sidebar) {
+                    sidebar.classList.remove('open');
+                }
+            });
+        });
+        
+        // Initialize add location button
+        const addLocationBtn = document.getElementById('add-location-btn');
+        if (addLocationBtn) {
+            addLocationBtn.addEventListener('click', function() {
+                // Get current map center coordinates
+                const center = window.map.map.getCenter();
+                
+                // Update form with current coordinates
+                document.getElementById('lat').value = center.lat.toFixed(6);
+                document.getElementById('lng').value = center.lng.toFixed(6);
+                
+                // Open the form
+                document.getElementById('add-location-form').classList.add('open');
+            });
+        }
+        
+        // Initialize type filters
+        const typeFilters = document.querySelectorAll('.type-filter');
+        typeFilters.forEach(function(checkbox) {
+            checkbox.addEventListener('change', function() {
+                const typeFilter = this.closest('.type-filter');
+                if (typeFilter) {
+                    if (this.checked) {
+                        typeFilter.classList.add('active');
+                    } else {
+                        typeFilter.classList.remove('active');
+                    }
+                }
+                
+                // Get all active filters
+                const activeTypes = Array.from(document.querySelectorAll('.type-filter:checked'))
+                    .map(el => el.dataset.type);
+                
+                // Apply to map
+                const activeFilters = {
+                    wheelchair: document.querySelector('.filter-btn[data-filter="wheelchair"]').classList.contains('active'),
+                    visual: document.querySelector('.filter-btn[data-filter="visual"]').classList.contains('active'),
+                    hearing: document.querySelector('.filter-btn[data-filter="hearing"]').classList.contains('active'),
+                    cognitive: document.querySelector('.filter-btn[data-filter="cognitive"]').classList.contains('active'),
+                    locationTypes: activeTypes
+                };
+                
+                window.map.applyFilters(activeFilters);
+            });
+        });
+    });
+</script>
+{% endblock %} 

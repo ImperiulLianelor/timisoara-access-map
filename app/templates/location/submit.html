@@ -1,0 +1,248 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="content-container">
+    <div class="page-header">
+        <h1>{{ _('Submit Accessible Location') }}</h1>
+        <p class="lead">{{ _('Help others by sharing accessible locations in Timisoara.') }}</p>
+    </div>
+    
+    <div class="form-container">
+        <form action="{{ url_for('main.submit_location') }}" method="POST" enctype="multipart/form-data" id="submit-location-form">
+            <!-- CSRF Token - explicit form -->
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            
+            <!-- Location details fieldset -->
+            <fieldset>
+                <legend>{{ _('Location Details') }}</legend>
+                
+                <div class="form-group">
+                    <label for="name">{{ _('Name') }} *</label>
+                    <input type="text" id="name" name="name" class="form-control" required>
+                    <small class="help-text">{{ _('The name of the location (e.g. "Central Park Restaurant")') }}</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="description">{{ _('Description') }}</label>
+                    <textarea id="description" name="description" rows="3" class="form-control"></textarea>
+                    <small class="help-text">{{ _('A brief description of the location and its accessibility features') }}</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="address">{{ _('Address') }}</label>
+                    <input type="text" id="address" name="address" class="form-control">
+                </div>
+                
+                <div class="form-group">
+                    <label for="location_type">{{ _('Location Type') }}</label>
+                    <select id="location_type" name="location_type" class="form-control">
+                        <option value="">{{ _('-- Select Type --') }}</option>
+                        <option value="restaurant">{{ _('Restaurant') }}</option>
+                        <option value="cafe">{{ _('Café') }}</option>
+                        <option value="shop">{{ _('Shop') }}</option>
+                        <option value="attraction">{{ _('Attraction') }}</option>
+                        <option value="publicbuilding">{{ _('Public Building') }}</option>
+                        <option value="transportation">{{ _('Transportation') }}</option>
+                        <option value="healthcare">{{ _('Healthcare') }}</option>
+                        <option value="other">{{ _('Other') }}</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="lat">{{ _('Latitude') }} *</label>
+                    <input type="text" id="lat" name="lat" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="lng">{{ _('Longitude') }} *</label>
+                    <input type="text" id="lng" name="lng" class="form-control" required>
+                </div>
+                
+                <div class="map-select-container">
+                    <p>{{ _('Or select a location on the map:') }}</p>
+                    <div id="location-select-map" class="select-map"></div>
+                    <button type="button" id="get-current-location" class="btn secondary">
+                        {{ _('Use My Current Location') }}
+                    </button>
+                </div>
+            </fieldset>
+            
+            <!-- Accessibility features fieldset -->
+            <fieldset>
+                <legend>{{ _('Accessibility Features') }}</legend>
+                
+                <div class="checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="has_ramp" name="has_ramp">
+                        <span>{{ _('Has wheelchair ramp') }}</span>
+                    </label>
+                   
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="has_accessible_wc" name="has_accessible_wc">
+                        <span>{{ _('Has accessible toilet') }}</span>
+                    </label>
+                    
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="has_accessible_parking" name="has_accessible_parking">
+                        <span>{{ _('Has accessible parking') }}</span>
+                    </label>
+                    
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="has_accessible_entrance" name="has_accessible_entrance">
+                        <span>{{ _('Has accessible entrance') }}</span>
+                    </label>
+                    
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="has_braille" name="has_braille">
+                        <span>{{ _('Has braille signage') }}</span>
+                    </label>
+                    
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="has_audio_guidance" name="has_audio_guidance">
+                        <span>{{ _('Has audio guidance') }}</span>
+                    </label>
+                    
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="has_staff_assistance" name="has_staff_assistance">
+                        <span>{{ _('Has trained staff assistance') }}</span>
+                    </label>
+                </div>
+            </fieldset>
+            
+            <!-- Photos fieldset -->
+            <fieldset>
+                <legend>{{ _('Photos') }}</legend>
+                
+                <div class="form-group">
+                    <label for="photos">{{ _('Upload Photos (Max 3)') }}</label>
+                    <input type="file" id="photos" name="photos" accept="image/jpeg,image/png" multiple class="form-control">
+                    <small class="help-text">{{ _('Max 5MB per photo. JPEG or PNG only.') }}</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="photo_description">{{ _('Photo Description') }}</label>
+                    <input type="text" id="photo_description" name="photo_description" class="form-control" placeholder="{{ _('Describe what the photos show') }}">
+                    <small class="help-text">{{ _('Adding descriptions helps users with visual impairments.') }}</small>
+                </div>
+            </fieldset>
+            
+            <!-- Submit button -->
+            <div class="form-actions">
+                <button type="submit" class="btn primary" id="submit-btn">{{ _('Submit Location') }}</button>
+                <a href="{{ url_for('main.index') }}" class="btn secondary">{{ _('Cancel') }}</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize location select map if available
+    const mapElement = document.getElementById('location-select-map');
+    const latInput = document.getElementById('lat');
+    const lngInput = document.getElementById('lng');
+    
+    if (mapElement && latInput && lngInput) {
+        // Create small map for location selection
+        const selectMap = L.map(mapElement, {
+            center: [45.7557, 21.2300],
+            zoom: 13
+        });
+        
+        // Add OpenStreetMap tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            maxZoom: 19
+        }).addTo(selectMap);
+        
+        // Add marker that follows clicks
+        let marker = L.marker([45.7557, 21.2300], {
+            draggable: true
+        }).addTo(selectMap);
+        
+        // Update coordinates when marker is moved
+        marker.on('dragend', function(e) {
+            const position = marker.getLatLng();
+            latInput.value = position.lat.toFixed(6);
+            lngInput.value = position.lng.toFixed(6);
+        });
+        
+        // Update marker position when clicking on map
+        selectMap.on('click', function(e) {
+            marker.setLatLng(e.latlng);
+            latInput.value = e.latlng.lat.toFixed(6);
+            lngInput.value = e.latlng.lng.toFixed(6);
+        });
+        
+        // Use current location button
+        const locationBtn = document.getElementById('get-current-location');
+        if (locationBtn) {
+            locationBtn.addEventListener('click', function() {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(
+                        function(position) {
+                            const lat = position.coords.latitude;
+                            const lng = position.coords.longitude;
+                            
+                            // Check if location is within Timisoara bounds
+                            if (lat >= 45.70 && lat <= 45.80 && 
+                                lng >= 21.10 && lng <= 21.35) {
+                                
+                                marker.setLatLng([lat, lng]);
+                                selectMap.setView([lat, lng], 16);
+                                
+                                latInput.value = lat.toFixed(6);
+                                lngInput.value = lng.toFixed(6);
+                            } else {
+                                alert('Your current location is outside Timisoara city limits.');
+                            }
+                        },
+                        function(error) {
+                            console.error('Geolocation error:', error);
+                            alert('Could not get your current location. Please select a location on the map.');
+                        }
+                    );
+                } else {
+                    alert('Geolocation is not supported by your browser. Please select a location on the map.');
+                }
+            });
+        }
+        
+        // If initial coordinates are provided, update map
+        if (latInput.value && lngInput.value) {
+            const lat = parseFloat(latInput.value);
+            const lng = parseFloat(lngInput.value);
+            if (!isNaN(lat) && !isNaN(lng)) {
+                marker.setLatLng([lat, lng]);
+                selectMap.setView([lat, lng], 16);
+            }
+        }
+    }
+
+    // Form submission handling with debug
+    const form = document.getElementById('submit-location-form');
+    if (form) {
+        form.addEventListener('submit', function(event) {
+            // For debugging - log form data
+            console.log('Form submission attempted');
+            
+            // Check required fields
+            const name = document.getElementById('name').value;
+            const lat = document.getElementById('lat').value;
+            const lng = document.getElementById('lng').value;
+            
+            if (!name || !lat || !lng) {
+                event.preventDefault();
+                alert('Please fill in all required fields: Name, Latitude, and Longitude');
+                return false;
+            }
+            
+            // If all is good, let the form submit
+            console.log('Form submission proceeding');
+        });
+    }
+});
+</script>
+{% endblock %} 

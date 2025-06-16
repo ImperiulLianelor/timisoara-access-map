@@ -1,0 +1,1371 @@
+# Romanian translations for Timisoara Access Map.
+# Copyright (C) 2025 Popa Sebastian Gabriel
+# This file is distributed under the same license as the Timisoara Access Map project.
+# Popa Sebastian Gabriel <your.email@example.com>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Timisoara Access Map 1.0\n"
+"Report-Msgid-Bugs-To: your.email@example.com\n"
+"POT-Creation-Date: 2025-06-15 15:20+0300\n" # This will be from your actual .pot
+"PO-Revision-Date: 2025-06-16 10:00+0300\n" # Update this as you finalize
+"Last-Translator: Popa Sebastian Gabriel <your.email@example.com>\n"
+"Language: ro\n"
+"Language-Team: Romanian <ro@example.org>\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : (n==0 || (n%100>0 && n%100<20)) ? 1 : 2);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: app/routes/admin.py:17
+msgid "Access denied. Admin privileges required."
+msgstr "Acces refuzat. Sunt necesare privilegii de administrator."
+
+#: app/routes/admin.py:49 app/templates/admin/dashboard.html:6
+msgid "Admin Dashboard"
+msgstr "Panou de Administrare"
+
+#: app/routes/admin.py:63 app/templates/admin/dashboard.html:33
+#: app/templates/admin/locations.html:6
+msgid "Manage Locations"
+msgstr "Gestionare Locații"
+
+#: app/routes/admin.py:73 app/templates/admin/dashboard.html:13
+#: app/templates/admin/locations.html:9
+#: app/templates/admin/pending_locations.html:6
+msgid "Pending Locations"
+msgstr "Locații în Așteptare"
+
+#: app/routes/admin.py:91
+msgid "Location has been approved."
+msgstr "Locația a fost aprobată."
+
+#: app/routes/admin.py:121
+msgid "Location has been rejected and deleted."
+msgstr "Locația a fost respinsă și ștearsă."
+
+#: app/routes/admin.py:162
+msgid "Location has been updated."
+msgstr "Locația a fost actualizată."
+
+#: app/routes/admin.py:165 app/templates/admin/edit_locations.html:6
+#: app/templates/location/details.html:171
+msgid "Edit Location"
+msgstr "Editare Locație"
+
+#: app/routes/admin.py:175 app/templates/admin/dashboard.html:46
+#: app/templates/admin/users.html:6
+msgid "Manage Users"
+msgstr "Gestionare Utilizatori"
+
+#: app/routes/admin.py:185
+msgid "You cannot change your own admin status."
+msgstr "Nu vă puteți schimba propriul statut de administrator."
+
+#: app/routes/admin.py:198
+msgid "Admin status has been updated."
+msgstr "Statutul de administrator a fost actualizat."
+
+#: app/routes/admin.py:208
+msgid "You cannot deactivate your own account."
+msgstr "Nu vă puteți dezactiva propriul cont."
+
+#: app/routes/admin.py:221
+msgid "activated"
+msgstr "activat"
+
+#: app/routes/admin.py:221
+msgid "deactivated"
+msgstr "dezactivat"
+
+#: app/routes/admin.py:222
+#, python-format
+msgid "User account has been %(status)s."
+msgstr "Contul de utilizator a fost %(status)s."
+
+#: app/routes/admin.py:232
+msgid "Manage Reviews"
+msgstr "Gestionare Recenzii"
+
+#: app/routes/admin.py:252
+msgid "Review has been deleted."
+msgstr "Recenzia a fost ștearsă."
+
+#: app/routes/admin.py:262
+msgid "Admin Logs"
+msgstr "Jurnale Admin"
+
+#: app/routes/admin.py:290
+msgid "Photo has been deleted."
+msgstr "Fotografia a fost ștearsă."
+
+#: app/routes/auth.py:15 app/routes/auth.py:22
+#: app/templates/admin/users.html:42
+msgid "Username"
+msgstr "Nume utilizator"
+
+#: app/routes/auth.py:16 app/routes/auth.py:24
+msgid "Password"
+msgstr "Parolă"
+
+#: app/routes/auth.py:17
+msgid "Remember Me"
+msgstr "Ține-mă minte"
+
+#: app/routes/auth.py:18 app/routes/auth.py:77 app/templates/auth/login.html:6
+msgid "Sign In"
+msgstr "Autentificare"
+
+#: app/routes/auth.py:23 app/templates/admin/users.html:43
+msgid "Email"
+msgstr "Email"
+
+#: app/routes/auth.py:26
+msgid "Repeat Password"
+msgstr "Repetă Parola"
+
+#: app/routes/auth.py:29 app/templates/user/profile.html:75
+msgid "I use a wheelchair"
+msgstr "Folosesc un scaun cu rotile"
+
+#: app/routes/auth.py:30 app/templates/user/profile.html:84
+msgid "I need visual assistance"
+msgstr "Am nevoie de asistență vizuală"
+
+#: app/routes/auth.py:31 app/templates/user/profile.html:93
+msgid "I need hearing assistance"
+msgstr "Am nevoie de asistență auditivă"
+
+#: app/routes/auth.py:32 app/templates/user/profile.html:102
+msgid "I need cognitive assistance"
+msgstr "Am nevoie de asistență cognitivă"
+
+#: app/routes/auth.py:34 app/routes/auth.py:112
+#: app/templates/auth/login.html:46 app/templates/base.html:57
+msgid "Register"
+msgstr "Înregistrare"
+
+#: app/routes/auth.py:39
+msgid "Please use a different username."
+msgstr "Vă rugăm să folosiți un alt nume de utilizator."
+
+#: app/routes/auth.py:44
+msgid "Please use a different email address."
+msgstr "Vă rugăm să folosiți o altă adresă de email."
+
+#: app/routes/auth.py:58
+msgid "Invalid username or password"
+msgstr "Nume de utilizator atau parolă invalidă"
+
+#: app/routes/auth.py:62
+msgid "This account has been deactivated. Please contact an administrator."
+msgstr "Acest cont a fost dezactivat. Vă rugăm contactați un administrator."
+
+#: app/routes/auth.py:74
+msgid "Login successful!"
+msgstr "Autentificare reușită!"
+
+#: app/routes/auth.py:83
+msgid "You have been logged out."
+msgstr "Ați fost deconectat."
+
+#: app/routes/auth.py:109
+msgid "Registration successful! You can now log in."
+msgstr "Înregistrare reușită! Acum vă puteți autentifica."
+
+#: app/routes/main.py:22
+msgid "Accessible Timisoara"
+msgstr "Timișoara Accesibilă"
+
+#: app/routes/main.py:32 app/templates/user/profile.html:6
+msgid "My Profile"
+msgstr "Profilul Meu"
+
+#: app/routes/main.py:61
+msgid "Name and location are required."
+msgstr "Numele și locația sunt obligatorii."
+
+#: app/routes/main.py:105
+msgid "Thank you! Your location has been submitted and will be reviewed shortly."
+msgstr "Mulțumim! Locația dvs. a fost trimisă și va fi revizuită în curând."
+
+#: app/routes/main.py:109 app/templates/index.html:234
+#: app/templates/location/submit.html:131
+msgid "Submit Location"
+msgstr "Trimite Locație"
+
+#: app/routes/main.py:119
+msgid "This location is not yet approved."
+msgstr "Această locație nu este încă aprobată."
+
+#: app/routes/main.py:138
+msgid "You cannot review a location that has not been approved yet."
+msgstr "Nu puteți adăuga o recenzie pentru o locație care nu a fost încă aprobată."
+
+#: app/routes/main.py:145
+msgid "Both review text and rating are required."
+msgstr "recenzia și rating-ul sunt obligatorii."
+
+#: app/routes/main.py:159
+msgid "Your review has been added. Thank you for contributing!"
+msgstr "Recenzia dvs. a fost adăugată. Mulțumim pentru contribuție!"
+
+#: app/routes/main.py:171 app/templates/user/dashboard.html:6
+msgid "My Dashboard"
+msgstr "Panoul Meu"
+
+#: app/routes/main.py:186
+msgid "Your accessibility preferences have been updated."
+msgstr "Preferințele dvs. de accesibilitate au fost actualizate."
+
+#: app/routes/main.py:200
+msgid "Current password is incorrect."
+msgstr "Parola curentă este incorectă."
+
+#: app/routes/main.py:205
+msgid "New passwords do not match."
+msgstr "Parolele noi nu se potrivesc."
+
+#: app/routes/main.py:212
+msgid "Your password has been updated."
+msgstr "Parola dvs. a fost actualizată."
+
+#: app/templates/base.html:7 app/templates/base.html:100
+msgid "Timisoara Accessibility Map"
+msgstr "Harta Accesibilității Timișoara"
+
+#: app/templates/base.html:27
+msgid "Skip to content"
+msgstr "Sari la conținut"
+
+#: app/templates/base.html:33
+msgid "Timisoara Accessibility Map Homepage"
+msgstr "Pagina Principală Hartă Accesibilitate Timișoara"
+
+#: app/templates/base.html:34
+msgid "Timisoara Accessibility"
+msgstr "Accesibilitate Timișoara"
+
+#: app/templates/base.html:40
+msgid "Menu"
+msgstr "Meniu"
+
+#: app/templates/base.html:47 app/templates/base.html:107
+msgid "Map"
+msgstr "Hartă"
+
+#: app/templates/base.html:49
+msgid "Dashboard"
+msgstr "Panou de control"
+
+#: app/templates/base.html:50
+msgid "Profile"
+msgstr "Profil"
+
+#: app/templates/admin/logs.html:63 app/templates/admin/users.html:58
+#: app/templates/base.html:52
+msgid "Admin"
+msgstr "Admin"
+
+#: app/templates/base.html:54
+msgid "Logout"
+msgstr "Deconectare"
+
+#: app/templates/base.html:56
+msgid "Login"
+msgstr "Autentificare"
+
+#: app/templates/base.html:63
+msgid "Switch to Romanian"
+msgstr "Treci la Română"
+
+#: app/templates/base.html:65
+msgid "Switch to English"
+msgstr "Treci la Engleză"
+
+#: app/templates/base.html:82
+msgid "Close"
+msgstr "Închide"
+
+#: app/templates/base.html:101
+msgid "Helping people find accessible locations in Timisoara."
+msgstr "Ajutăm oamenii să găsească locații accesibile în Timișoara."
+
+#: app/templates/base.html:105
+msgid "Quick Links"
+msgstr "Link-uri Rapide"
+
+#: app/templates/base.html:108
+msgid "About"
+msgstr "Despre"
+
+#: app/templates/base.html:109
+msgid "Accessibility Guide"
+msgstr "Ghid de Accesibilitate"
+
+#: app/templates/base.html:110
+msgid "Contact"
+msgstr "Contact"
+
+#: app/templates/base.html:115
+msgid "Accessibility"
+msgstr "Accesibilitate"
+
+#: app/templates/base.html:116
+msgid "This website is designed to be accessible for all users, including those with disabilities."
+msgstr "Acest site web este conceput pentru a fi accesibil tuturor utilizatorilor, inclusiv celor cu dizabilități."
+
+#: app/templates/base.html:117
+msgid "Toggle High Contrast"
+msgstr "Comutare Contrast Ridicat"
+
+#: app/templates/base.html:124
+msgid "Timisoara Accessibility Map. All rights reserved."
+msgstr "Harta Accesibilității Timișoara. Toate drepturile rezervate."
+
+#: app/templates/index.html:8
+msgid "Find Accessible Locations"
+msgstr "Găsește Locații Accesibile"
+
+#: app/templates/index.html:12
+msgid "Search for a location..."
+msgstr "Caută o locație..."
+
+#: app/templates/index.html:13
+msgid "Search for a location"
+msgstr "Caută o locație"
+
+#: app/templates/admin/locations.html:40 app/templates/admin/users.html:25
+#: app/templates/index.html:14
+msgid "Search"
+msgstr "Caută"
+
+#: app/templates/admin/users.html:47 app/templates/index.html:22
+msgid "Accessibility Needs"
+msgstr "Nevoi de Accesibilitate"
+
+#: app/templates/index.html:26
+msgid "Wheelchair"
+msgstr "Scaun cu rotile"
+
+#: app/templates/index.html:30
+msgid "Visual"
+msgstr "Vizual"
+
+#: app/templates/index.html:34
+msgid "Hearing"
+msgstr "Auditiv"
+
+#: app/templates/index.html:38
+msgid "Cognitive"
+msgstr "Cognitiv"
+
+#: app/templates/index.html:45
+msgid "Location Types"
+msgstr "Tipuri de Locații"
+
+#: app/templates/index.html:49
+msgid "Restaurants"
+msgstr "Restaurante"
+
+#: app/templates/index.html:53
+msgid "Cafés"
+msgstr "Cafenele"
+
+#: app/templates/index.html:57
+msgid "Shops"
+msgstr "Magazine"
+
+#: app/templates/index.html:61
+msgid "Attractions"
+msgstr "Atracții"
+
+#: app/templates/index.html:65
+msgid "Public Buildings"
+msgstr "Clădiri Publice"
+
+#: app/templates/admin/edit_locations.html:38
+#: app/templates/admin/locations.html:24 app/templates/index.html:69
+#: app/templates/index.html:163 app/templates/location/submit.html:45
+msgid "Transportation"
+msgstr "Transport"
+
+#: app/templates/admin/edit_locations.html:39
+#: app/templates/admin/locations.html:25 app/templates/index.html:73
+#: app/templates/index.html:164 app/templates/location/submit.html:46
+msgid "Healthcare"
+msgstr "Sănătate"
+
+#: app/templates/admin/edit_locations.html:40
+#: app/templates/admin/locations.html:26 app/templates/index.html:77
+#: app/templates/index.html:165 app/templates/location/submit.html:47
+msgid "Other"
+msgstr "Altele"
+
+#: app/templates/index.html:87 app/templates/user/dashboard.html:17
+msgid "Add New Location"
+msgstr "Adaugă o locație nouă"
+
+#: app/templates/index.html:92 app/templates/location/details.html:149
+msgid "Please"
+msgstr "Vă rugăm"
+
+#: app/templates/index.html:92 app/templates/location/details.html:149
+msgid "log in"
+msgstr "autentificați-vă"
+
+#: app/templates/index.html:92
+msgid "to add new locations."
+msgstr "pentru a adăuga locații noi."
+
+#: app/templates/index.html:98
+msgid "Map Legend"
+msgstr "Legendă Hartă"
+
+#: app/templates/index.html:102
+msgid "Wheelchair Accessible"
+msgstr "Accesibil Scaun cu Rotile"
+
+#: app/templates/index.html:106
+msgid "Visual Assistance"
+msgstr "Asistență Vizuală"
+
+#: app/templates/index.html:110 app/templates/location/details.html:12
+msgid "Pending Approval"
+msgstr "În Așteptarea Aprobării"
+
+#: app/templates/index.html:118
+msgid "Accessibility map of Timisoara"
+msgstr "Harta accesibilității Timișoara"
+
+#: app/templates/index.html:128
+msgid "Close form"
+msgstr "Închide formular"
+
+#: app/templates/index.html:130
+msgid "Add New Accessible Location"
+msgstr "Adaugă Locație Nouă Accesibilă"
+
+#: app/templates/index.html:137 app/templates/location/submit.html:17
+msgid "Location Details"
+msgstr "Detalii Locație"
+
+#: app/templates/admin/dashboard.html:105
+#: app/templates/admin/edit_locations.html:25
+#: app/templates/admin/locations.html:57 app/templates/index.html:140
+#: app/templates/location/submit.html:20
+msgid "Name"
+msgstr "Nume"
+
+#: app/templates/admin/edit_locations.html:45 app/templates/index.html:145
+#: app/templates/location/details.html:20 app/templates/location/submit.html:26
+msgid "Description"
+msgstr "Descriere"
+
+#: app/templates/admin/edit_locations.html:50
+#: app/templates/admin/locations.html:59 app/templates/index.html:150
+#: app/templates/location/submit.html:32
+msgid "Address"
+msgstr "Adresă"
+
+#: app/templates/admin/edit_locations.html:30 app/templates/index.html:155
+#: app/templates/location/submit.html:37
+msgid "Location Type"
+msgstr "Tip Locație"
+
+#: app/templates/admin/edit_locations.html:32 app/templates/index.html:157
+#: app/templates/location/submit.html:39
+msgid "-- Select Type --"
+msgstr "-- Selectați Tipul --"
+
+#: app/templates/admin/edit_locations.html:33
+#: app/templates/admin/locations.html:19 app/templates/index.html:158
+#: app/templates/location/submit.html:40
+msgid "Restaurant"
+msgstr "Restaurant"
+
+#: app/templates/admin/edit_locations.html:34
+#: app/templates/admin/locations.html:20 app/templates/index.html:159
+#: app/templates/location/submit.html:41
+msgid "Café"
+msgstr "Cafenea"
+
+#: app/templates/admin/edit_locations.html:35
+#: app/templates/admin/locations.html:21 app/templates/index.html:160
+#: app/templates/location/submit.html:42
+msgid "Shop"
+msgstr "Magazin"
+
+#: app/templates/admin/edit_locations.html:36
+#: app/templates/admin/locations.html:22 app/templates/index.html:161
+#: app/templates/location/submit.html:43
+msgid "Attraction"
+msgstr "Atracție"
+
+#: app/templates/admin/edit_locations.html:37
+#: app/templates/admin/locations.html:23 app/templates/index.html:162
+#: app/templates/location/submit.html:44
+msgid "Public Building"
+msgstr "Clădire Publică"
+
+#: app/templates/admin/edit_locations.html:78 app/templates/index.html:176
+#: app/templates/location/details.html:25 app/templates/location/submit.html:72
+msgid "Accessibility Features"
+msgstr "Caracteristici de Accesibilitate"
+
+#: app/templates/admin/edit_locations.html:83 app/templates/index.html:181
+#: app/templates/location/submit.html:77
+msgid "Has wheelchair ramp"
+msgstr "Are rampă pentru scaun cu rotile"
+
+#: app/templates/admin/edit_locations.html:88 app/templates/index.html:186
+#: app/templates/location/submit.html:82
+msgid "Has accessible toilet"
+msgstr "Are toaletă accesibilă"
+
+#: app/templates/admin/edit_locations.html:93 app/templates/index.html:191
+#: app/templates/location/submit.html:87
+msgid "Has accessible parking"
+msgstr "Are parcare accesibilă"
+
+#: app/templates/admin/edit_locations.html:98 app/templates/index.html:196
+#: app/templates/location/submit.html:92
+msgid "Has accessible entrance"
+msgstr "Are intrare accesibilă"
+
+#: app/templates/admin/edit_locations.html:103 app/templates/index.html:201
+#: app/templates/location/submit.html:97
+msgid "Has braille signage"
+msgstr "Are semnalizare Braille"
+
+#: app/templates/admin/edit_locations.html:108 app/templates/index.html:206
+#: app/templates/location/submit.html:102
+msgid "Has audio guidance"
+msgstr "Are ghidaj audio"
+
+#: app/templates/admin/edit_locations.html:113 app/templates/index.html:211
+#: app/templates/location/submit.html:107
+msgid "Has trained staff assistance"
+msgstr "Are asistență de la personal instruit"
+
+#: app/templates/admin/edit_locations.html:120
+#: app/templates/admin/pending_locations.html:86 app/templates/index.html:218
+#: app/templates/location/details.html:72
+#: app/templates/location/submit.html:114
+msgid "Photos"
+msgstr "Fotografii"
+
+#: app/templates/index.html:221 app/templates/location/submit.html:117
+msgid "Upload Photos (Max 3)"
+msgstr "Încarcă Fotografii (Max 3)"
+
+#: app/templates/admin/edit_locations.html:147 app/templates/index.html:223
+#: app/templates/location/submit.html:119
+msgid "Max 5MB per photo. JPEG or PNG only."
+msgstr "Max 5MB per fotografie. Doar JPEG sau PNG."
+
+#: app/templates/admin/edit_locations.html:151 app/templates/index.html:227
+#: app/templates/location/submit.html:123
+msgid "Photo Description"
+msgstr "Descriere Fotografie"
+
+#: app/templates/index.html:228 app/templates/location/submit.html:124
+msgid "Describe what the photos show"
+msgstr "Descrieți ce arată fotografiile"
+
+#: app/templates/admin/edit_locations.html:199
+#: app/templates/admin/edit_locations.html:225
+#: app/templates/admin/locations.html:134 app/templates/index.html:235
+#: app/templates/location/submit.html:132
+msgid "Cancel"
+msgstr "Anulează"
+
+#: app/templates/admin/dashboard.html:7
+msgid "Manage the Timisoara Accessibility Map platform."
+msgstr "Gestionează Timișoara Access Map."
+
+#: app/templates/admin/dashboard.html:17
+msgid "awaiting approval"
+msgstr "așteaptă aprobarea"
+
+#: app/templates/admin/dashboard.html:20
+msgid "Review Now"
+msgstr "Revizuiește Acum"
+
+#: app/templates/admin/dashboard.html:26
+msgid "Total Locations"
+msgstr "Total Locații"
+
+#: app/templates/admin/dashboard.html:30
+msgid "in database"
+msgstr "în baza de date"
+
+#: app/templates/admin/dashboard.html:39
+msgid "Users"
+msgstr "Utilizatori"
+
+#: app/templates/admin/dashboard.html:43
+msgid "registered users"
+msgstr "utilizatori înregistrați"
+
+#: app/templates/admin/dashboard.html:52
+msgid "Activity Logs"
+msgstr "Jurnale de Activitate"
+
+#: app/templates/admin/dashboard.html:56
+msgid "recent actions"
+msgstr "acțiuni recente"
+
+#: app/templates/admin/dashboard.html:59 app/templates/admin/dashboard.html:91
+msgid "View All Logs"
+msgstr "Vezi Toate Jurnalele"
+
+#: app/templates/admin/dashboard.html:67
+msgid "Recent Activity"
+msgstr "Activitate Recentă"
+
+#: app/templates/admin/dashboard.html:87
+msgid "No recent activity found."
+msgstr "Nu s-a găsit nicio activitate recentă."
+
+#: app/templates/admin/dashboard.html:97
+msgid "Recent Locations"
+msgstr "Locații Recente"
+
+#: app/templates/admin/dashboard.html:106 app/templates/admin/locations.html:16
+#: app/templates/admin/locations.html:58
+msgid "Type"
+msgstr "Tip"
+
+#: app/templates/admin/dashboard.html:107
+#: app/templates/admin/edit_locations.html:176
+#: app/templates/admin/locations.html:31 app/templates/admin/locations.html:60
+#: app/templates/admin/users.html:15 app/templates/admin/users.html:45
+msgid "Status"
+msgstr "Statut"
+
+#: app/templates/admin/dashboard.html:108
+msgid "Submitted"
+msgstr "Trimis"
+
+#: app/templates/admin/dashboard.html:109 app/templates/admin/locations.html:63
+#: app/templates/admin/users.html:48
+msgid "Actions"
+msgstr "Acțiuni"
+
+#: app/templates/admin/dashboard.html:119
+#: app/templates/admin/edit_locations.html:179
+#: app/templates/admin/locations.html:34 app/templates/admin/locations.html:74
+#: app/templates/user/dashboard.html:30 app/templates/user/dashboard.html:158
+msgid "Approved"
+msgstr "Aprobat"
+
+#: app/templates/admin/dashboard.html:121
+#: app/templates/admin/edit_locations.html:181
+#: app/templates/admin/locations.html:35 app/templates/admin/locations.html:76
+#: app/templates/user/dashboard.html:28 app/templates/user/dashboard.html:162
+msgid "Pending"
+msgstr "În așteptare"
+
+#: app/templates/admin/dashboard.html:126 app/templates/admin/locations.html:83
+msgid "View"
+msgstr "Vezi"
+
+#: app/templates/admin/dashboard.html:131 app/templates/admin/locations.html:92
+#: app/templates/admin/pending_locations.html:106
+#: app/templates/location/details.html:180
+msgid "Approve"
+msgstr "Aprobă"
+
+#: app/templates/admin/dashboard.html:136
+#: app/templates/admin/pending_locations.html:111
+#: app/templates/location/details.html:185
+msgid "Reject"
+msgstr "Respinge"
+
+#: app/templates/admin/dashboard.html:146
+msgid "No recent locations found."
+msgstr "Nu s-au găsit locații recente."
+
+#: app/templates/admin/dashboard.html:150
+msgid "View All Locations"
+msgstr "Vezi Toate Locațiile"
+
+#: app/templates/admin/edit_locations.html:8
+msgid "Back to Locations"
+msgstr "Înapoi la Locații"
+
+#: app/templates/admin/edit_locations.html:9
+#: app/templates/user/dashboard.html:91
+msgid "View Location"
+msgstr "Vezi Locația"
+
+#: app/templates/admin/edit_locations.html:22
+msgid "Basic Information"
+msgstr "Informații de Bază"
+
+#: app/templates/admin/edit_locations.html:57
+msgid "Location"
+msgstr "Locație"
+
+#: app/templates/admin/edit_locations.html:61
+#: app/templates/location/submit.html:52
+msgid "Latitude"
+msgstr "Latitudine"
+
+#: app/templates/admin/edit_locations.html:66
+#: app/templates/location/submit.html:57
+msgid "Longitude"
+msgstr "Longitudine"
+
+#: app/templates/admin/edit_locations.html:124
+msgid "Current Photos"
+msgstr "Fotografii Curente"
+
+#: app/templates/admin/edit_locations.html:133
+#: app/templates/admin/edit_locations.html:226
+#: app/templates/admin/locations.html:100
+#: app/templates/admin/locations.html:135
+msgid "Delete"
+msgstr "Șterge"
+
+#: app/templates/admin/edit_locations.html:141
+#: app/templates/location/details.html:87
+msgid "No photos available for this location."
+msgstr "Nicio fotografie disponibilă pentru această locație."
+
+#: app/templates/admin/edit_locations.html:145
+msgid "Upload New Photos"
+msgstr "Încarcă Fotografii Noi"
+
+#: app/templates/admin/edit_locations.html:152
+msgid "Describe what the new photos show"
+msgstr "Descrieți ce arată noile fotografii"
+
+#: app/templates/admin/edit_locations.html:158
+msgid "Management"
+msgstr "Administrare"
+
+#: app/templates/admin/edit_locations.html:161
+#: app/templates/admin/locations.html:61
+msgid "Submitted By"
+msgstr "Trimis de"
+
+#: app/templates/admin/edit_locations.html:166
+msgid "Submission Date"
+msgstr "Data Trimiterii"
+
+#: app/templates/admin/edit_locations.html:171
+msgid "Last Updated"
+msgstr "Ultima Actualizare"
+
+#: app/templates/admin/edit_locations.html:189
+msgid "Mark as approved"
+msgstr "Marchează ca aprobat"
+
+#: app/templates/admin/edit_locations.html:198
+#: app/templates/user/profile.html:56
+msgid "Save Changes"
+msgstr "Salvează Modificările"
+
+#: app/templates/admin/edit_locations.html:204
+msgid "Delete Location"
+msgstr "Șterge Locația"
+
+#: app/templates/admin/edit_locations.html:216
+#: app/templates/admin/locations.html:123
+msgid "Confirm Deletion"
+msgstr "Confirmă Ștergerea"
+
+#: app/templates/admin/edit_locations.html:220
+#: app/templates/admin/locations.html:127
+msgid "Are you sure you want to delete this location?"
+msgstr "Sunteți sigur că doriți să ștergeți această locație?"
+
+#: app/templates/admin/edit_locations.html:222
+msgid "This action cannot be undone and will remove all associated photos and reviews."
+msgstr "Această acțiune nu poate fi anulată și va elimina toate fotografiile și recenziile asociate."
+
+#: app/templates/admin/locations.html:8 app/templates/admin/logs.html:8
+#: app/templates/admin/pending_locations.html:8
+#: app/templates/admin/pending_locations.html:122
+#: app/templates/admin/users.html:8
+msgid "Back to Dashboard"
+msgstr "Înapoi la Panoul de Control"
+
+#: app/templates/admin/locations.html:18
+msgid "All Types"
+msgstr "Toate Tipurile"
+
+#: app/templates/admin/locations.html:33
+msgid "All Statuses"
+msgstr "Toate Statusurile"
+
+#: app/templates/admin/locations.html:41
+msgid "Name or address"
+msgstr "Nume sau adresă"
+
+#: app/templates/admin/locations.html:45 app/templates/admin/logs.html:50
+#: app/templates/admin/users.html:30
+msgid "Filter"
+msgstr "Filtrează"
+
+#: app/templates/admin/locations.html:46 app/templates/admin/logs.html:51
+#: app/templates/admin/users.html:31
+msgid "Clear Filters"
+msgstr "Curăță Filtrele"
+
+#: app/templates/admin/locations.html:62
+msgid "Date"
+msgstr "Data"
+
+#: app/templates/admin/locations.html:71
+msgid "No address"
+msgstr "Fără adresă"
+
+#: app/templates/admin/locations.html:86
+msgid "Edit"
+msgstr "Editează"
+
+#: app/templates/admin/locations.html:112
+msgid "No locations found matching your criteria."
+msgstr "Nu s-au găsit locații care să corespundă criteriilor dvs."
+
+#: app/templates/admin/locations.html:129
+msgid "This action cannot be undone."
+msgstr "Această acțiune nu poate fi anulată."
+
+#: app/templates/admin/logs.html:6
+msgid "Admin Activity Logs"
+msgstr "Jurnale Activitate Admin"
+
+#: app/templates/admin/logs.html:15
+msgid "Action Type"
+msgstr "Tip Acțiune"
+
+#: app/templates/admin/logs.html:17
+msgid "All Actions"
+msgstr "Toate Acțiunile"
+
+#: app/templates/admin/logs.html:18
+msgid "Location Approval"
+msgstr "Aprobare Locație"
+
+#: app/templates/admin/logs.html:19
+msgid "Location Rejection"
+msgstr "Respingere Locație"
+
+#: app/templates/admin/logs.html:20
+msgid "Location Edit"
+msgstr "Editare Locație"
+
+#: app/templates/admin/logs.html:21
+msgid "Admin Grant"
+msgstr "Acordare Admin"
+
+#: app/templates/admin/logs.html:22
+msgid "Admin Revoke"
+msgstr "Revocare Admin"
+
+#: app/templates/admin/logs.html:23
+msgid "User Activation"
+msgstr "Activare Utilizator"
+
+#: app/templates/admin/logs.html:24
+msgid "User Deactivation"
+msgstr "Dezactivare Utilizator"
+
+#: app/templates/admin/logs.html:25
+msgid "Review Deletion"
+msgstr "Ștergere Recenzie"
+
+#: app/templates/admin/logs.html:26
+msgid "Photo Deletion"
+msgstr "Ștergere Fotografie"
+
+#: app/templates/admin/logs.html:31
+msgid "Admin User"
+msgstr "Utilizator Admin"
+
+#: app/templates/admin/logs.html:33
+msgid "All Admins"
+msgstr "Toți Adminii"
+
+#: app/templates/admin/logs.html:41
+msgid "Date Range"
+msgstr "Interval Datar"
+
+#: app/templates/admin/logs.html:43
+msgid "Start date"
+msgstr "Data de început"
+
+#: app/templates/admin/logs.html:44
+msgid "to"
+msgstr "până la"
+
+#: app/templates/admin/logs.html:45
+msgid "End date"
+msgstr "Data de sfârșit"
+
+#: app/templates/admin/logs.html:62
+msgid "Action"
+msgstr "Acțiune"
+
+#: app/templates/admin/logs.html:64
+msgid "IP Address"
+msgstr "Adresă IP"
+
+#: app/templates/admin/logs.html:65
+msgid "Details"
+msgstr "Detalii"
+
+#: app/templates/admin/logs.html:66
+msgid "Timestamp"
+msgstr "Marcaj Temporal"
+
+#: app/templates/admin/logs.html:94
+msgid "Previous"
+msgstr "Anterior"
+
+#: app/templates/admin/logs.html:98
+#, python-format
+msgid "Page %(current)s of %(total)s"
+msgstr "Pagina %(current)s din %(total)s"
+
+#: app/templates/admin/logs.html:102
+msgid "Next"
+msgstr "Următor"
+
+#: app/templates/admin/logs.html:108
+msgid "No admin activity logs found matching your criteria."
+msgstr "Nu s-au găsit jurnale de activitate admin care să corespundă criteriilor dvs."
+
+#: app/templates/admin/pending_locations.html:9
+msgid "All Locations"
+msgstr "Toate Locațiile"
+
+#: app/templates/admin/pending_locations.html:16
+msgid "locations pending approval"
+msgstr "locații așteaptă aprobarea"
+
+#: app/templates/admin/pending_locations.html:38
+msgid "Address:"
+msgstr "Adresă:"
+
+#: app/templates/admin/pending_locations.html:38
+#: app/templates/location/details.html:7 app/templates/user/dashboard.html:35
+msgid "No address provided"
+msgstr "Nicio adresă furnizată"
+
+#: app/templates/admin/pending_locations.html:41
+#: app/templates/location/details.html:21
+msgid "No description provided"
+msgstr "Nicio descriere furnizată"
+
+#: app/templates/admin/pending_locations.html:45
+msgid "Accessibility:"
+msgstr "Accesibilitate:"
+
+#: app/templates/admin/pending_locations.html:48
+#: app/templates/location/details.html:29
+msgid "Wheelchair ramp"
+msgstr "Rampă scaun cu rotile"
+
+#: app/templates/admin/pending_locations.html:52
+#: app/templates/location/details.html:35 app/templates/user/dashboard.html:43
+msgid "Accessible toilet"
+msgstr "Toaletă accesibilă"
+
+#: app/templates/admin/pending_locations.html:56
+#: app/templates/location/details.html:47
+msgid "Accessible entrance"
+msgstr "Intrare accesibilă"
+
+#: app/templates/admin/pending_locations.html:60
+msgid "Braille"
+msgstr "Braille"
+
+#: app/templates/admin/pending_locations.html:64
+#: app/templates/location/details.html:59
+msgid "Audio guidance"
+msgstr "Ghidaj audio"
+
+#: app/templates/admin/pending_locations.html:68
+#: app/templates/location/details.html:65
+msgid "Staff assistance"
+msgstr "Asistență personal"
+
+#: app/templates/admin/pending_locations.html:75
+msgid "Submitted by:"
+msgstr "Trimis de:"
+
+#: app/templates/admin/pending_locations.html:78
+msgid "Date:"
+msgstr "Data:"
+
+#: app/templates/admin/pending_locations.html:101
+#: app/templates/user/dashboard.html:52
+msgid "View Details"
+msgstr "Vezi Detalii"
+
+#: app/templates/admin/pending_locations.html:120
+msgid "No locations pending approval."
+msgstr "Nicio locație nu așteaptă aprobarea."
+
+#: app/templates/admin/pending_locations.html:121
+msgid "Great job! You're all caught up."
+msgstr "Excelent! Sunteți la zi."
+
+#: app/templates/admin/pending_locations.html:162
+msgid "Are you sure you want to reject this location? This will permanently delete it."
+msgstr "Sunteți sigur că doriți să respingeți această locație? Aceasta va fi ștearsă definitiv."
+
+#: app/templates/admin/users.html:17
+msgid "All Users"
+msgstr "Toți Utilizatorii"
+
+#: app/templates/admin/users.html:18 app/templates/admin/users.html:65
+msgid "Active"
+msgstr "Activ"
+
+#: app/templates/admin/users.html:19 app/templates/admin/users.html:67
+msgid "Inactive"
+msgstr "Inactiv"
+
+#: app/templates/admin/users.html:20
+msgid "Admins"
+msgstr "Admini"
+
+#: app/templates/admin/users.html:26
+msgid "Username or email"
+msgstr "Nume utilizator sau email"
+
+#: app/templates/admin/users.html:44
+msgid "Role"
+msgstr "Rol"
+
+#: app/templates/admin/users.html:46
+msgid "Joined"
+msgstr "Înscris la"
+
+#: app/templates/admin/users.html:60
+msgid "User"
+msgstr "Utilizator"
+
+#: app/templates/admin/users.html:74
+msgid "Needs wheelchair access"
+msgstr "Nevoie de acces cu scaunul cu rotile"
+
+#: app/templates/admin/users.html:78
+msgid "Needs visual assistance"
+msgstr "Nevoie de asistență vizuală"
+
+#: app/templates/admin/users.html:82
+msgid "Needs hearing assistance"
+msgstr "Nevoie de asistență auditivă"
+
+#: app/templates/admin/users.html:86
+msgid "Needs cognitive assistance"
+msgstr "Nevoie de asistență cognitivă"
+
+#: app/templates/admin/users.html:97
+msgid "Remove admin role"
+msgstr "Elimină rolul de admin"
+
+#: app/templates/admin/users.html:99
+msgid "Make admin"
+msgstr "Fă admin"
+
+#: app/templates/admin/users.html:107
+msgid "Deactivate user"
+msgstr "Dezactivează utilizator"
+
+#: app/templates/admin/users.html:109
+msgid "Activate user"
+msgstr "Activează utilizator"
+
+#: app/templates/admin/users.html:113
+msgid "Current user"
+msgstr "Utilizator curent"
+
+#: app/templates/admin/users.html:122
+msgid "No users found matching your criteria."
+msgstr "Nu s-au găsit utilizatori care să corespundă criteriilor dvs."
+
+#: app/templates/admin/users.html:150
+msgid "Are you sure you want to remove admin privileges from this user?"
+msgstr "Sunteți sigur că doriți să eliminați privilegiile de admin pentru acest utilizator?"
+
+#: app/templates/admin/users.html:151
+msgid "Are you sure you want to grant admin privileges to this user?"
+msgstr "Sunteți sigur că doriți să acordați privilegii de admin acestui utilizator?"
+
+#: app/templates/admin/users.html:163
+msgid "Are you sure you want to deactivate this user? They will not be able to log in."
+msgstr "Sunteți sigur că doriți să dezactivați acest utilizator? Acesta nu se va mai putea autentifica."
+
+#: app/templates/admin/users.html:164
+msgid "Are you sure you want to activate this user?"
+msgstr "Sunteți sigur că doriți să activați acest utilizator?"
+
+#: app/templates/auth/login.html:46
+msgid "Don't have an account?"
+msgstr "Nu aveți cont?"
+
+#: app/templates/auth/register.html:6
+msgid "Create an Account"
+msgstr "Creează un Cont"
+
+#: app/templates/auth/register.html:60 app/templates/user/dashboard.html:119
+#: app/templates/user/profile.html:63
+msgid "Accessibility Preferences"
+msgstr "Preferințe de Accesibilitate"
+
+#: app/templates/auth/register.html:91
+msgid "Already have an account?"
+msgstr "Aveți deja un cont?"
+
+#: app/templates/auth/register.html:91
+msgid "Log In"
+msgstr "Autentifică-te"
+
+#: app/templates/location/details.html:30
+#: app/templates/location/details.html:36
+#: app/templates/location/details.html:42
+#: app/templates/location/details.html:48
+#: app/templates/location/details.html:54
+#: app/templates/location/details.html:60
+#: app/templates/location/details.html:66
+msgid "Yes"
+msgstr "Da"
+
+#: app/templates/location/details.html:30
+#: app/templates/location/details.html:36
+#: app/templates/location/details.html:42
+#: app/templates/location/details.html:48
+#: app/templates/location/details.html:54
+#: app/templates/location/details.html:60
+#: app/templates/location/details.html:66
+msgid "No"
+msgstr "Nu"
+
+#: app/templates/location/details.html:41
+msgid "Accessible parking"
+msgstr "Parcare accesibilă"
+
+#: app/templates/location/details.html:53
+msgid "Braille signage"
+msgstr "Semnalizare Braille"
+
+#: app/templates/location/details.html:92 app/templates/user/dashboard.html:154
+msgid "Reviews"
+msgstr "Recenzii"
+
+#: app/templates/location/details.html:118
+msgid "No reviews yet. Be the first to review this location!"
+msgstr "Nicio recenzie încă. Fii primul care adaugă o recenzie acestei locații!"
+
+#: app/templates/location/details.html:123
+msgid "Add Your Review"
+msgstr "Adaugă o recenzie"
+
+#: app/templates/location/details.html:128
+msgid "Rating"
+msgstr "Rating"
+
+#: app/templates/location/details.html:132
+msgid "stars"
+msgstr "stele"
+
+#: app/templates/location/details.html:138
+msgid "Your Review"
+msgstr "Recenzia Ta"
+
+#: app/templates/location/details.html:143
+msgid "Submit Review"
+msgstr "Trimite Recenzie"
+
+#: app/templates/location/details.html:149
+msgid "to add a review."
+msgstr "pentru a adăuga o recenzie."
+
+#: app/templates/location/details.html:153
+msgid "Reviews can only be added once this location has been approved."
+msgstr "Recenziile pot fi adăugate doar după ce această locație a fost aprobată."
+
+#: app/templates/location/details.html:166
+msgid "Get Directions"
+msgstr "Obține Indicații"
+
+#: app/templates/location/details.html:189
+msgid "Edit as Admin"
+msgstr "Editează ca Admin"
+
+#: app/templates/location/submit.html:6
+msgid "Submit Accessible Location"
+msgstr "Adauga o locație accesibilă"
+
+#: app/templates/location/submit.html:7
+msgid "Help others by sharing accessible locations in Timisoara."
+msgstr "Ajută-i pe alții împărtășind locații accesibile în Timișoara."
+
+#: app/templates/location/submit.html:22
+msgid "The name of the location (e.g. \"Central Park Restaurant\")"
+msgstr "Numele locației (ex. \"Restaurant Parcul Central\")"
+
+#: app/templates/location/submit.html:28
+msgid "A brief description of the location and its accessibility features"
+msgstr "O scurtă descriere a locației și a caracteristicilor sale de accesibilitate"
+
+#: app/templates/location/submit.html:62
+msgid "Or select a location on the map:"
+msgstr "Sau selectați o locație pe hartă:"
+
+#: app/templates/location/submit.html:65
+msgid "Use My Current Location"
+msgstr "Folosește Locația Mea Curentă"
+
+#: app/templates/location/submit.html:125
+msgid "Adding descriptions helps users with visual impairments."
+msgstr "Adăugarea descrierilor ajută utilizatorii cu deficiențe de vedere."
+
+#: app/templates/user/dashboard.html:7
+msgid "Welcome back, "
+msgstr "Bine ai revenit, "
+
+#: app/templates/user/dashboard.html:14
+msgid "My Locations"
+msgstr "Locațiile Mele"
+
+#: app/templates/user/dashboard.html:40
+msgid "Wheelchair accessible"
+msgstr "Accesibil scaun cu rotile"
+
+#: app/templates/user/dashboard.html:46
+msgid "Braille available"
+msgstr "Braille disponibil"
+
+#: app/templates/user/dashboard.html:59
+msgid "You haven't added any locations yet."
+msgstr "Nu ați adăugat încă nicio locație."
+
+#: app/templates/user/dashboard.html:60
+msgid "Add Your First Location"
+msgstr "Adaugă prima ta locație"
+
+#: app/templates/user/dashboard.html:66
+msgid "My Reviews"
+msgstr "Recenziile Mele"
+
+#: app/templates/user/dashboard.html:98
+msgid "You haven't written any reviews yet."
+msgstr "Nu ați scris încă nicio recenzie."
+
+#: app/templates/user/dashboard.html:99
+msgid "Find Places to Review"
+msgstr "Găsește Locuri de Recenzat"
+
+#: app/templates/user/dashboard.html:114 app/templates/user/profile.html:18
+msgid "Member since"
+msgstr "Membru din"
+
+#: app/templates/user/dashboard.html:123
+msgid "Wheelchair access"
+msgstr "Acces scaun cu rotile"
+
+#: app/templates/user/dashboard.html:127
+msgid "Visual assistance"
+msgstr "Asistență vizuală"
+
+#: app/templates/user/dashboard.html:131
+msgid "Hearing assistance"
+msgstr "Asistență auditivă"
+
+#: app/templates/user/dashboard.html:135
+msgid "Cognitive assistance"
+msgstr "Asistență cognitivă"
+
+#: app/templates/user/dashboard.html:141
+msgid "Edit Profile"
+msgstr "Editează Profilul"
+
+#: app/templates/user/dashboard.html:146
+msgid "Your Activity"
+msgstr "Activitatea Ta"
+
+#: app/templates/user/dashboard.html:150
+msgid "Locations"
+msgstr "Locații"
+
+#: app/templates/user/profile.html:21
+msgid "Administrator"
+msgstr "Administrator"
+
+#: app/templates/user/profile.html:28
+msgid "Locations Added"
+msgstr "Locații Adăugate"
+
+#: app/templates/user/profile.html:36
+msgid "Account Settings"
+msgstr "Setări Cont"
+
+#: app/templates/user/profile.html:43
+msgid "Email Address"
+msgstr "Adresă de Email"
+
+#: app/templates/user/profile.html:48
+msgid "Preferred Language"
+msgstr "Limbă Preferată"
+
+#: app/templates/user/profile.html:50
+msgid "Romanian"
+msgstr "Română"
+
+#: app/templates/user/profile.html:51
+msgid "English"
+msgstr "Engleză"
+
+#: app/templates/user/profile.html:64
+msgid "Select options below to customize your experience and filter locations by your needs."
+msgstr "Selectați din opțiunile de mai jos pentru a vă personaliza experiența și pentru a filtra locațiile după nevoile dvs."
+
+#: app/templates/user/profile.html:77
+msgid "Show locations with ramps, accessible entrances, and parking"
+msgstr "Afișează locații cu rampe, intrări accesibile și parcare"
+
+#: app/templates/user/profile.html:86
+msgid "Show locations with braille signage and audio guidance"
+msgstr "Afișează locații cu semnalizare Braille și ghidaj audio"
+
+#: app/templates/user/profile.html:95
+msgid "Show locations with visual alerts and staff trained in sign language"
+msgstr "Afișează locații cu alerte vizuale și personal instruit în limbajul semnelor"
+
+#: app/templates/user/profile.html:104
+msgid "Show locations with simplified navigation and staff assistance"
+msgstr "Afișează locații cu navigație simplificată și asistență din partea personalului"
+
+#: app/templates/user/profile.html:109
+msgid "Save Preferences"
+msgstr "Salvează Preferințele"
+
+#: app/templates/user/profile.html:116 app/templates/user/profile.html:139
+msgid "Change Password"
+msgstr "Schimbă Parola"
+
+#: app/templates/user/profile.html:123
+msgid "Current Password"
+msgstr "Parola Curentă"
+
+#: app/templates/user/profile.html:128
+msgid "New Password"
+msgstr "Parolă Nouă"
+
+#: app/templates/user/profile.html:130
+msgid "Password must be at least 8 characters with letters and numbers"
+msgstr "Parola trebuie să conțină cel puțin 8 caractere, cu litere și cifre"
+
+#: app/templates/user/profile.html:134
+msgid "Confirm New Password"
+msgstr "Confirmă Parola Nouă"

@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="content-container admin-dashboard">
+    <div class="page-header">
+        <h1>{{ _('Admin Dashboard') }}</h1>
+        <p class="lead">{{ _('Manage the Timisoara Accessibility Map platform.') }}</p>
+    </div>
+    
+    <div class="admin-stats">
+        <div class="stat-card">
+            <div class="stat-card-header">
+                <h3>{{ _('Pending Locations') }}</h3>
+            </div>
+            <div class="stat-card-content">
+                <div class="stat-value">{{ pending_locations }}</div>
+                <div class="stat-desc">{{ _('awaiting approval') }}</div>
+            </div>
+            <div class="stat-card-footer">
+                <a href="{{ url_for('admin.pending_locations') }}" class="btn primary">{{ _('Review Now') }}</a>
+            </div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-card-header">
+                <h3>{{ _('Total Locations') }}</h3>
+            </div>
+            <div class="stat-card-content">
+                <div class="stat-value">{{ total_locations }}</div>
+                <div class="stat-desc">{{ _('in database') }}</div>
+            </div>
+            <div class="stat-card-footer">
+                <a href="{{ url_for('admin.locations') }}" class="btn primary">{{ _('Manage Locations') }}</a>
+            </div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-card-header">
+                <h3>{{ _('Users') }}</h3>
+            </div>
+            <div class="stat-card-content">
+                <div class="stat-value">{{ total_users }}</div>
+                <div class="stat-desc">{{ _('registered users') }}</div>
+            </div>
+            <div class="stat-card-footer">
+                <a href="{{ url_for('admin.users') }}" class="btn primary">{{ _('Manage Users') }}</a>
+            </div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-card-header">
+                <h3>{{ _('Activity Logs') }}</h3>
+            </div>
+            <div class="stat-card-content">
+                <div class="stat-value">{{ recent_logs|length }}</div>
+                <div class="stat-desc">{{ _('recent actions') }}</div>
+            </div>
+            <div class="stat-card-footer">
+                <a href="{{ url_for('admin.logs') }}" class="btn primary">{{ _('View All Logs') }}</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="admin-panels">
+        <div class="admin-panel">
+            <div class="panel-header">
+                <h2>{{ _('Recent Activity') }}</h2>
+            </div>
+            <div class="panel-content">
+                {% if recent_logs %}
+                    <div class="logs-list">
+                        {% for log in recent_logs %}
+                            <div class="log-item">
+                                <div class="log-action">{{ log.action }}</div>
+                                <div class="log-details">
+                                    <span class="log-admin">{{ log.admin.username }}</span>
+                                    <span class="log-time">{{ log.timestamp.strftime('%d %b %Y, %H:%M') }}</span>
+                                    <span class="log-ip">{{ log.ip_address }}</span>
+                                </div>
+                                {% if log.details %}
+                                    <div class="log-extra">{{ log.details }}</div>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p class="no-data">{{ _('No recent activity found.') }}</p>
+                {% endif %}
+            </div>
+            <div class="panel-footer">
+                <a href="{{ url_for('admin.logs') }}" class="btn text">{{ _('View All Logs') }}</a>
+            </div>
+        </div>
+        
+        <div class="admin-panel">
+            <div class="panel-header">
+                <h2>{{ _('Recent Locations') }}</h2>
+            </div>
+            <div class="panel-content">
+                {% if recent_locations %}
+                    <div class="locations-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>{{ _('Name') }}</th>
+                                    <th>{{ _('Type') }}</th>
+                                    <th>{{ _('Status') }}</th>
+                                    <th>{{ _('Submitted') }}</th>
+                                    <th>{{ _('Actions') }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for location in recent_locations %}
+                                    <tr>
+                                        <td>{{ location.name }}</td>
+                                        <td>{{ location.location_type|capitalize }}</td>
+                                        <td>
+                                            {% if location.is_approved %}
+                                                <span class="status-approved">{{ _('Approved') }}</span>
+                                            {% else %}
+                                                <span class="status-pending">{{ _('Pending') }}</span>
+                                            {% endif %}
+                                        </td>
+                                        <td>{{ location.created_at.strftime('%d %b') }}</td>
+                                        <td>
+                                            <a href="{{ url_for('main.location_details', location_id=location.id) }}" class="btn icon view-btn" title="{{ _('View') }}">👁️</a>
+                                            
+                                            {% if not location.is_approved %}
+                                                <form action="{{ url_for('admin.approve_location', location_id=location.id) }}" method="POST" class="inline-form">
+                                                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                                    <button type="submit" class="btn icon approve-btn" title="{{ _('Approve') }}">✓</button>
+                                                </form>
+                                                
+                                                <form action="{{ url_for('admin.reject_location', location_id=location.id) }}" method="POST" class="inline-form">
+                                                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                                    <button type="submit" class="btn icon reject-btn" title="{{ _('Reject') }}">✗</button>
+                                                </form>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <p class="no-data">{{ _('No recent locations found.') }}</p>
+                {% endif %}
+            </div>
+            <div class="panel-footer">
+                <a href="{{ url_for('admin.locations') }}" class="btn text">{{ _('View All Locations') }}</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Any dashboard-specific JavaScript
+    });
+</script>
+{% endblock %}

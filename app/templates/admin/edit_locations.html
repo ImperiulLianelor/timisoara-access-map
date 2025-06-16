@@ -1,0 +1,334 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="content-container admin-page">
+    <div class="page-header">
+        <h1>{{ _('Edit Location') }}: {{ location.name }}</h1>
+        <div class="header-actions">
+            <a href="{{ url_for('admin.locations') }}" class="btn secondary">{{ _('Back to Locations') }}</a>
+            <a href="{{ url_for('main.location_details', location_id=location.id) }}" class="btn primary">{{ _('View Location') }}</a>
+        </div>
+    </div>
+    
+    <div class="admin-content">
+        <div class="edit-form-container">
+            <form action="{{ url_for('admin.edit_location', location_id=location.id) }}" method="POST" enctype="multipart/form-data" id="edit-location-form">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                
+                <div class="form-columns">
+                    <div class="form-column">
+                        <!-- Basic details -->
+                        <div class="form-section">
+                            <h3>{{ _('Basic Information') }}</h3>
+                            
+                            <div class="form-group">
+                                <label for="name">{{ _('Name') }} *</label>
+                                <input type="text" id="name" name="name" value="{{ location.name }}" class="form-control" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="location_type">{{ _('Location Type') }}</label>
+                                <select id="location_type" name="location_type" class="form-control">
+                                    <option value="" {% if not location.location_type %}selected{% endif %}>{{ _('-- Select Type --') }}</option>
+                                    <option value="restaurant" {% if location.location_type == 'restaurant' %}selected{% endif %}>{{ _('Restaurant') }}</option>
+                                    <option value="cafe" {% if location.location_type == 'cafe' %}selected{% endif %}>{{ _('Café') }}</option>
+                                    <option value="shop" {% if location.location_type == 'shop' %}selected{% endif %}>{{ _('Shop') }}</option>
+                                    <option value="attraction" {% if location.location_type == 'attraction' %}selected{% endif %}>{{ _('Attraction') }}</option>
+                                    <option value="publicbuilding" {% if location.location_type == 'publicbuilding' %}selected{% endif %}>{{ _('Public Building') }}</option>
+                                    <option value="transportation" {% if location.location_type == 'transportation' %}selected{% endif %}>{{ _('Transportation') }}</option>
+                                    <option value="healthcare" {% if location.location_type == 'healthcare' %}selected{% endif %}>{{ _('Healthcare') }}</option>
+                                    <option value="other" {% if location.location_type == 'other' %}selected{% endif %}>{{ _('Other') }}</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="description">{{ _('Description') }}</label>
+                                <textarea id="description" name="description" rows="5" class="form-control">{{ location.description }}</textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="address">{{ _('Address') }}</label>
+                                <input type="text" id="address" name="address" value="{{ location.address }}" class="form-control">
+                            </div>
+                        </div>
+                        
+                        <!-- Coordinates and map -->
+                        <div class="form-section">
+                            <h3>{{ _('Location') }}</h3>
+                            
+                            <div class="coordinate-inputs">
+                                <div class="form-group">
+                                    <label for="lat">{{ _('Latitude') }} *</label>
+                                    <input type="text" id="lat" name="lat" value="{{ location.lat }}" class="form-control" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="lng">{{ _('Longitude') }} *</label>
+                                    <input type="text" id="lng" name="lng" value="{{ location.lng }}" class="form-control" required>
+                                </div>
+                            </div>
+                            
+                            <div id="edit-location-map" class="edit-map"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-column">
+                        <!-- Accessibility features -->
+                        <div class="form-section">
+                            <h3>{{ _('Accessibility Features') }}</h3>
+                            
+                            <div class="checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="has_ramp" name="has_ramp" {% if location.has_ramp %}checked{% endif %}>
+                                    <span>{{ _('Has wheelchair ramp') }}</span>
+                                </label>
+                                
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="has_accessible_wc" name="has_accessible_wc" {% if location.has_accessible_wc %}checked{% endif %}>
+                                    <span>{{ _('Has accessible toilet') }}</span>
+                                </label>
+                                
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="has_accessible_parking" name="has_accessible_parking" {% if location.has_accessible_parking %}checked{% endif %}>
+                                    <span>{{ _('Has accessible parking') }}</span>
+                                </label>
+                                
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="has_accessible_entrance" name="has_accessible_entrance" {% if location.has_accessible_entrance %}checked{% endif %}>
+                                    <span>{{ _('Has accessible entrance') }}</span>
+                                </label>
+                                
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="has_braille" name="has_braille" {% if location.has_braille %}checked{% endif %}>
+                                    <span>{{ _('Has braille signage') }}</span>
+                                </label>
+                                
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="has_audio_guidance" name="has_audio_guidance" {% if location.has_audio_guidance %}checked{% endif %}>
+                                    <span>{{ _('Has audio guidance') }}</span>
+                                </label>
+                                
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="has_staff_assistance" name="has_staff_assistance" {% if location.has_staff_assistance %}checked{% endif %}>
+                                    <span>{{ _('Has trained staff assistance') }}</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <!-- Photos -->
+                        <div class="form-section">
+                            <h3>{{ _('Photos') }}</h3>
+                            
+                            {% if location.photos.count() > 0 %}
+                                <div class="current-photos">
+                                    <h4>{{ _('Current Photos') }}</h4>
+                                    <div class="photo-grid">
+                                        {% for photo in location.photos %}
+                                            <div class="photo-item">
+                                                <img src="{{ url_for('static', filename='uploads/' + photo.filename) }}" 
+                                                     alt="{{ photo.description or location.name }}">
+                                                <div class="photo-actions">
+                                                    <form action="{{ url_for('admin.delete_photo', photo_id=photo.id) }}" method="POST">
+                                                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                                        <button type="submit" class="btn danger-subtle">{{ _('Delete') }}</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            {% else %}
+                                <p>{{ _('No photos available for this location.') }}</p>
+                            {% endif %}
+                            
+                            <div class="form-group">
+                                <label for="photos">{{ _('Upload New Photos') }}</label>
+                                <input type="file" id="photos" name="photos" accept="image/jpeg,image/png" multiple class="form-control">
+                                <small class="help-text">{{ _('Max 5MB per photo. JPEG or PNG only.') }}</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="photo_description">{{ _('Photo Description') }}</label>
+                                <input type="text" id="photo_description" name="photo_description" class="form-control" placeholder="{{ _('Describe what the new photos show') }}">
+                            </div>
+                        </div>
+                        
+                        <!-- Management info -->
+                        <div class="form-section">
+                            <h3>{{ _('Management') }}</h3>
+                            
+                            <div class="info-group">
+                                <div class="info-label">{{ _('Submitted By') }}</div>
+                                <div class="info-value">{{ location.author.username }}</div>
+                            </div>
+                            
+                            <div class="info-group">
+                                <div class="info-label">{{ _('Submission Date') }}</div>
+                                <div class="info-value">{{ location.created_at.strftime('%d %b %Y, %H:%M') }}</div>
+                            </div>
+                            
+                            <div class="info-group">
+                                <div class="info-label">{{ _('Last Updated') }}</div>
+                                <div class="info-value">{{ location.updated_at.strftime('%d %b %Y, %H:%M') }}</div>
+                            </div>
+                            
+                            <div class="info-group">
+                                <div class="info-label">{{ _('Status') }}</div>
+                                <div class="info-value status-badge {% if location.is_approved %}approved{% else %}pending{% endif %}">
+                                    {% if location.is_approved %}
+                                        {{ _('Approved') }}
+                                    {% else %}
+                                        {{ _('Pending') }}
+                                    {% endif %}
+                                </div>
+                            </div>
+                            
+                            <div class="status-toggle">
+                                <label class="toggle-label">
+                                    <input type="checkbox" name="is_approved" {% if location.is_approved %}checked{% endif %}>
+                                    <span class="toggle-text">{{ _('Mark as approved') }}</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Submit buttons -->
+                <div class="form-actions">
+                    <button type="submit" class="btn primary">{{ _('Save Changes') }}</button>
+                    <a href="{{ url_for('admin.locations') }}" class="btn secondary">{{ _('Cancel') }}</a>
+                    
+                    <!-- Delete button -->
+                    <form action="{{ url_for('admin.reject_location', location_id=location.id) }}" method="POST" id="delete-form" class="inline-form">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                        <button type="button" id="delete-btn" class="btn danger">{{ _('Delete Location') }}</button>
+                    </form>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div id="deleteModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>{{ _('Confirm Deletion') }}</h3>
+            <button type="button" class="close-modal">&times;</button>
+        </div>
+        <div class="modal-body">
+            <p>{{ _('Are you sure you want to delete this location?') }}</p>
+            <p><strong>{{ location.name }}</strong></p>
+            <p>{{ _('This action cannot be undone and will remove all associated photos and reviews.') }}</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn secondary" id="cancel-delete">{{ _('Cancel') }}</button>
+            <button type="button" class="btn danger" id="confirm-delete">{{ _('Delete') }}</button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize map for location editing
+        const mapElement = document.getElementById('edit-location-map');
+        const latInput = document.getElementById('lat');
+        const lngInput = document.getElementById('lng');
+        
+        if (mapElement && latInput && lngInput) {
+            // Get initial coordinates
+            const initialLat = parseFloat(latInput.value) || 45.7557;
+            const initialLng = parseFloat(lngInput.value) || 21.2300;
+            
+            // Create map
+            const map = L.map(mapElement, {
+                center: [initialLat, initialLng],
+                zoom: 15
+            });
+            
+            // Add OpenStreetMap tiles
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                maxZoom: 19
+            }).addTo(map);
+            
+            // Add marker
+            const marker = L.marker([initialLat, initialLng], {
+                draggable: true
+            }).addTo(map);
+            
+            // Update coordinates when marker is moved
+            marker.on('dragend', function() {
+                const position = marker.getLatLng();
+                latInput.value = position.lat.toFixed(6);
+                lngInput.value = position.lng.toFixed(6);
+            });
+            
+            // Update marker and center map when coordinates are changed manually
+            function updateMapFromInputs() {
+                const lat = parseFloat(latInput.value);
+                const lng = parseFloat(lngInput.value);
+                
+                if (!isNaN(lat) && !isNaN(lng)) {
+                    marker.setLatLng([lat, lng]);
+                    map.setView([lat, lng], 15);
+                }
+            }
+            
+            latInput.addEventListener('change', updateMapFromInputs);
+            lngInput.addEventListener('change', updateMapFromInputs);
+            
+            // When clicking on the map, update marker and inputs
+            map.on('click', function(e) {
+                marker.setLatLng(e.latlng);
+                latInput.value = e.latlng.lat.toFixed(6);
+                lngInput.value = e.latlng.lng.toFixed(6);
+            });
+        }
+        
+        // Deletion modal
+        const modal = document.getElementById('deleteModal');
+        const deleteBtn = document.getElementById('delete-btn');
+        const cancelDelete = document.getElementById('cancel-delete');
+        const confirmDelete = document.getElementById('confirm-delete');
+        const closeModal = document.querySelector('.close-modal');
+        const deleteForm = document.getElementById('delete-form');
+        
+        if (deleteBtn && modal) {
+            deleteBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                modal.style.display = 'block';
+            });
+            
+            // Close modal methods
+            function closeDeleteModal() {
+                modal.style.display = 'none';
+            }
+            
+            if (closeModal) {
+                closeModal.addEventListener('click', closeDeleteModal);
+            }
+            
+            if (cancelDelete) {
+                cancelDelete.addEventListener('click', closeDeleteModal);
+            }
+            
+            // Confirm delete
+            if (confirmDelete && deleteForm) {
+                confirmDelete.addEventListener('click', function() {
+                    deleteForm.submit();
+                });
+            }
+            
+            // Close when clicking outside
+            window.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    closeDeleteModal();
+                }
+            });
+        }
+    });
+</script>
+{% endblock %}

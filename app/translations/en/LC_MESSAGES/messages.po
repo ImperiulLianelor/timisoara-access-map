@@ -1,0 +1,1382 @@
+# English translations for PROJECT.
+# Copyright (C) 2025 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2025-06-15 15:20+0300\n"
+"PO-Revision-Date: 2025-06-15 15:22+0300\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: app/routes/admin.py:17
+msgid "Access denied. Admin privileges required."
+msgstr ""
+
+#: app/routes/admin.py:49 app/templates/admin/dashboard.html:6
+msgid "Admin Dashboard"
+msgstr ""
+
+#: app/routes/admin.py:63 app/templates/admin/dashboard.html:33
+#: app/templates/admin/locations.html:6
+msgid "Manage Locations"
+msgstr ""
+
+#: app/routes/admin.py:73 app/templates/admin/dashboard.html:13
+#: app/templates/admin/locations.html:9
+#: app/templates/admin/pending_locations.html:6
+msgid "Pending Locations"
+msgstr ""
+
+#: app/routes/admin.py:91
+msgid "Location has been approved."
+msgstr ""
+
+#: app/routes/admin.py:121
+msgid "Location has been rejected and deleted."
+msgstr ""
+
+#: app/routes/admin.py:162
+msgid "Location has been updated."
+msgstr ""
+
+#: app/routes/admin.py:165 app/templates/admin/edit_locations.html:6
+#: app/templates/location/details.html:171
+msgid "Edit Location"
+msgstr ""
+
+#: app/routes/admin.py:175 app/templates/admin/dashboard.html:46
+#: app/templates/admin/users.html:6
+msgid "Manage Users"
+msgstr ""
+
+#: app/routes/admin.py:185
+msgid "You cannot change your own admin status."
+msgstr ""
+
+#: app/routes/admin.py:198
+msgid "Admin status has been updated."
+msgstr ""
+
+#: app/routes/admin.py:208
+msgid "You cannot deactivate your own account."
+msgstr ""
+
+#: app/routes/admin.py:221
+msgid "activated"
+msgstr ""
+
+#: app/routes/admin.py:221
+msgid "deactivated"
+msgstr ""
+
+#: app/routes/admin.py:222
+#, python-format
+msgid "User account has been %(status)s."
+msgstr ""
+
+#: app/routes/admin.py:232
+msgid "Manage Reviews"
+msgstr ""
+
+#: app/routes/admin.py:252
+msgid "Review has been deleted."
+msgstr ""
+
+#: app/routes/admin.py:262
+msgid "Admin Logs"
+msgstr ""
+
+#: app/routes/admin.py:290
+msgid "Photo has been deleted."
+msgstr ""
+
+#: app/routes/auth.py:15 app/routes/auth.py:22
+#: app/templates/admin/users.html:42
+msgid "Username"
+msgstr ""
+
+#: app/routes/auth.py:16 app/routes/auth.py:24
+msgid "Password"
+msgstr ""
+
+#: app/routes/auth.py:17
+msgid "Remember Me"
+msgstr ""
+
+#: app/routes/auth.py:18 app/routes/auth.py:77 app/templates/auth/login.html:6
+msgid "Sign In"
+msgstr ""
+
+#: app/routes/auth.py:23 app/templates/admin/users.html:43
+msgid "Email"
+msgstr ""
+
+#: app/routes/auth.py:26
+msgid "Repeat Password"
+msgstr ""
+
+#: app/routes/auth.py:29 app/templates/user/profile.html:75
+msgid "I use a wheelchair"
+msgstr ""
+
+#: app/routes/auth.py:30 app/templates/user/profile.html:84
+msgid "I need visual assistance"
+msgstr ""
+
+#: app/routes/auth.py:31 app/templates/user/profile.html:93
+msgid "I need hearing assistance"
+msgstr ""
+
+#: app/routes/auth.py:32 app/templates/user/profile.html:102
+msgid "I need cognitive assistance"
+msgstr ""
+
+#: app/routes/auth.py:34 app/routes/auth.py:112
+#: app/templates/auth/login.html:46 app/templates/base.html:57
+msgid "Register"
+msgstr ""
+
+#: app/routes/auth.py:39
+msgid "Please use a different username."
+msgstr ""
+
+#: app/routes/auth.py:44
+msgid "Please use a different email address."
+msgstr ""
+
+#: app/routes/auth.py:58
+msgid "Invalid username or password"
+msgstr ""
+
+#: app/routes/auth.py:62
+msgid "This account has been deactivated. Please contact an administrator."
+msgstr ""
+
+#: app/routes/auth.py:74
+msgid "Login successful!"
+msgstr ""
+
+#: app/routes/auth.py:83
+msgid "You have been logged out."
+msgstr ""
+
+#: app/routes/auth.py:109
+msgid "Registration successful! You can now log in."
+msgstr ""
+
+#: app/routes/main.py:22
+msgid "Accessible Timisoara"
+msgstr ""
+
+#: app/routes/main.py:32 app/templates/user/profile.html:6
+msgid "My Profile"
+msgstr ""
+
+#: app/routes/main.py:61
+msgid "Name and location are required."
+msgstr ""
+
+#: app/routes/main.py:105
+msgid "Thank you! Your location has been submitted and will be reviewed shortly."
+msgstr ""
+
+#: app/routes/main.py:109 app/templates/index.html:234
+#: app/templates/location/submit.html:131
+msgid "Submit Location"
+msgstr ""
+
+#: app/routes/main.py:119
+msgid "This location is not yet approved."
+msgstr ""
+
+#: app/routes/main.py:138
+msgid "You cannot review a location that has not been approved yet."
+msgstr ""
+
+#: app/routes/main.py:145
+msgid "Both review text and rating are required."
+msgstr ""
+
+#: app/routes/main.py:159
+msgid "Your review has been added. Thank you for contributing!"
+msgstr ""
+
+#: app/routes/main.py:171 app/templates/user/dashboard.html:6
+msgid "My Dashboard"
+msgstr ""
+
+#: app/routes/main.py:186
+msgid "Your accessibility preferences have been updated."
+msgstr ""
+
+#: app/routes/main.py:200
+msgid "Current password is incorrect."
+msgstr ""
+
+#: app/routes/main.py:205
+msgid "New passwords do not match."
+msgstr ""
+
+#: app/routes/main.py:212
+msgid "Your password has been updated."
+msgstr ""
+
+#: app/templates/base.html:7 app/templates/base.html:100
+msgid "Timisoara Accessibility Map"
+msgstr ""
+
+#: app/templates/base.html:27
+msgid "Skip to content"
+msgstr ""
+
+#: app/templates/base.html:33
+msgid "Timisoara Accessibility Map Homepage"
+msgstr ""
+
+#: app/templates/base.html:34
+msgid "Timisoara Accessibility"
+msgstr ""
+
+#: app/templates/base.html:40
+msgid "Menu"
+msgstr ""
+
+#: app/templates/base.html:47 app/templates/base.html:107
+msgid "Map"
+msgstr ""
+
+#: app/templates/base.html:49
+msgid "Dashboard"
+msgstr ""
+
+#: app/templates/base.html:50
+msgid "Profile"
+msgstr ""
+
+#: app/templates/admin/logs.html:63 app/templates/admin/users.html:58
+#: app/templates/base.html:52
+msgid "Admin"
+msgstr ""
+
+#: app/templates/base.html:54
+msgid "Logout"
+msgstr ""
+
+#: app/templates/base.html:56
+msgid "Login"
+msgstr ""
+
+#: app/templates/base.html:63
+msgid "Switch to Romanian"
+msgstr ""
+
+#: app/templates/base.html:65
+msgid "Switch to English"
+msgstr ""
+
+#: app/templates/base.html:82
+msgid "Close"
+msgstr ""
+
+#: app/templates/base.html:101
+msgid "Helping people find accessible locations in Timisoara."
+msgstr ""
+
+#: app/templates/base.html:105
+msgid "Quick Links"
+msgstr ""
+
+#: app/templates/base.html:108
+msgid "About"
+msgstr ""
+
+#: app/templates/base.html:109
+msgid "Accessibility Guide"
+msgstr ""
+
+#: app/templates/base.html:110
+msgid "Contact"
+msgstr ""
+
+#: app/templates/base.html:115
+msgid "Accessibility"
+msgstr ""
+
+#: app/templates/base.html:116
+msgid ""
+"This website is designed to be accessible for all users, including those "
+"with disabilities."
+msgstr ""
+
+#: app/templates/base.html:117
+msgid "Toggle High Contrast"
+msgstr ""
+
+#: app/templates/base.html:124
+msgid "Timisoara Accessibility Map. All rights reserved."
+msgstr ""
+
+#: app/templates/index.html:8
+msgid "Find Accessible Locations"
+msgstr ""
+
+#: app/templates/index.html:12
+msgid "Search for a location..."
+msgstr ""
+
+#: app/templates/index.html:13
+msgid "Search for a location"
+msgstr ""
+
+#: app/templates/admin/locations.html:40 app/templates/admin/users.html:25
+#: app/templates/index.html:14
+msgid "Search"
+msgstr ""
+
+#: app/templates/admin/users.html:47 app/templates/index.html:22
+msgid "Accessibility Needs"
+msgstr ""
+
+#: app/templates/index.html:26
+msgid "Wheelchair"
+msgstr ""
+
+#: app/templates/index.html:30
+msgid "Visual"
+msgstr ""
+
+#: app/templates/index.html:34
+msgid "Hearing"
+msgstr ""
+
+#: app/templates/index.html:38
+msgid "Cognitive"
+msgstr ""
+
+#: app/templates/index.html:45
+msgid "Location Types"
+msgstr ""
+
+#: app/templates/index.html:49
+msgid "Restaurants"
+msgstr ""
+
+#: app/templates/index.html:53
+msgid "Cafés"
+msgstr ""
+
+#: app/templates/index.html:57
+msgid "Shops"
+msgstr ""
+
+#: app/templates/index.html:61
+msgid "Attractions"
+msgstr ""
+
+#: app/templates/index.html:65
+msgid "Public Buildings"
+msgstr ""
+
+#: app/templates/admin/edit_locations.html:38
+#: app/templates/admin/locations.html:24 app/templates/index.html:69
+#: app/templates/index.html:163 app/templates/location/submit.html:45
+msgid "Transportation"
+msgstr ""
+
+#: app/templates/admin/edit_locations.html:39
+#: app/templates/admin/locations.html:25 app/templates/index.html:73
+#: app/templates/index.html:164 app/templates/location/submit.html:46
+msgid "Healthcare"
+msgstr ""
+
+#: app/templates/admin/edit_locations.html:40
+#: app/templates/admin/locations.html:26 app/templates/index.html:77
+#: app/templates/index.html:165 app/templates/location/submit.html:47
+msgid "Other"
+msgstr ""
+
+#: app/templates/index.html:87 app/templates/user/dashboard.html:17
+msgid "Add New Location"
+msgstr ""
+
+#: app/templates/index.html:92 app/templates/location/details.html:149
+msgid "Please"
+msgstr ""
+
+#: app/templates/index.html:92 app/templates/location/details.html:149
+msgid "log in"
+msgstr ""
+
+#: app/templates/index.html:92
+msgid "to add new locations."
+msgstr ""
+
+#: app/templates/index.html:98
+msgid "Map Legend"
+msgstr ""
+
+#: app/templates/index.html:102
+msgid "Wheelchair Accessible"
+msgstr ""
+
+#: app/templates/index.html:106
+msgid "Visual Assistance"
+msgstr ""
+
+#: app/templates/index.html:110 app/templates/location/details.html:12
+msgid "Pending Approval"
+msgstr ""
+
+#: app/templates/index.html:118
+msgid "Accessibility map of Timisoara"
+msgstr ""
+
+#: app/templates/index.html:128
+msgid "Close form"
+msgstr ""
+
+#: app/templates/index.html:130
+msgid "Add New Accessible Location"
+msgstr ""
+
+#: app/templates/index.html:137 app/templates/location/submit.html:17
+msgid "Location Details"
+msgstr ""
+
+#: app/templates/admin/dashboard.html:105
+#: app/templates/admin/edit_locations.html:25
+#: app/templates/admin/locations.html:57 app/templates/index.html:140
+#: app/templates/location/submit.html:20
+msgid "Name"
+msgstr ""
+
+#: app/templates/admin/edit_locations.html:45 app/templates/index.html:145
+#: app/templates/location/details.html:20 app/templates/location/submit.html:26
+msgid "Description"
+msgstr ""
+
+#: app/templates/admin/edit_locations.html:50
+#: app/templates/admin/locations.html:59 app/templates/index.html:150
+#: app/templates/location/submit.html:32
+msgid "Address"
+msgstr ""
+
+#: app/templates/admin/edit_locations.html:30 app/templates/index.html:155
+#: app/templates/location/submit.html:37
+msgid "Location Type"
+msgstr ""
+
+#: app/templates/admin/edit_locations.html:32 app/templates/index.html:157
+#: app/templates/location/submit.html:39
+msgid "-- Select Type --"
+msgstr ""
+
+#: app/templates/admin/edit_locations.html:33
+#: app/templates/admin/locations.html:19 app/templates/index.html:158
+#: app/templates/location/submit.html:40
+msgid "Restaurant"
+msgstr ""
+
+#: app/templates/admin/edit_locations.html:34
+#: app/templates/admin/locations.html:20 app/templates/index.html:159
+#: app/templates/location/submit.html:41
+msgid "Café"
+msgstr ""
+
+#: app/templates/admin/edit_locations.html:35
+#: app/templates/admin/locations.html:21 app/templates/index.html:160
+#: app/templates/location/submit.html:42
+msgid "Shop"
+msgstr ""
+
+#: app/templates/admin/edit_locations.html:36
+#: app/templates/admin/locations.html:22 app/templates/index.html:161
+#: app/templates/location/submit.html:43
+msgid "Attraction"
+msgstr ""
+
+#: app/templates/admin/edit_locations.html:37
+#: app/templates/admin/locations.html:23 app/templates/index.html:162
+#: app/templates/location/submit.html:44
+msgid "Public Building"
+msgstr ""
+
+#: app/templates/admin/edit_locations.html:78 app/templates/index.html:176
+#: app/templates/location/details.html:25 app/templates/location/submit.html:72
+msgid "Accessibility Features"
+msgstr ""
+
+#: app/templates/admin/edit_locations.html:83 app/templates/index.html:181
+#: app/templates/location/submit.html:77
+msgid "Has wheelchair ramp"
+msgstr ""
+
+#: app/templates/admin/edit_locations.html:88 app/templates/index.html:186
+#: app/templates/location/submit.html:82
+msgid "Has accessible toilet"
+msgstr ""
+
+#: app/templates/admin/edit_locations.html:93 app/templates/index.html:191
+#: app/templates/location/submit.html:87
+msgid "Has accessible parking"
+msgstr ""
+
+#: app/templates/admin/edit_locations.html:98 app/templates/index.html:196
+#: app/templates/location/submit.html:92
+msgid "Has accessible entrance"
+msgstr ""
+
+#: app/templates/admin/edit_locations.html:103 app/templates/index.html:201
+#: app/templates/location/submit.html:97
+msgid "Has braille signage"
+msgstr ""
+
+#: app/templates/admin/edit_locations.html:108 app/templates/index.html:206
+#: app/templates/location/submit.html:102
+msgid "Has audio guidance"
+msgstr ""
+
+#: app/templates/admin/edit_locations.html:113 app/templates/index.html:211
+#: app/templates/location/submit.html:107
+msgid "Has trained staff assistance"
+msgstr ""
+
+#: app/templates/admin/edit_locations.html:120
+#: app/templates/admin/pending_locations.html:86 app/templates/index.html:218
+#: app/templates/location/details.html:72
+#: app/templates/location/submit.html:114
+msgid "Photos"
+msgstr ""
+
+#: app/templates/index.html:221 app/templates/location/submit.html:117
+msgid "Upload Photos (Max 3)"
+msgstr ""
+
+#: app/templates/admin/edit_locations.html:147 app/templates/index.html:223
+#: app/templates/location/submit.html:119
+msgid "Max 5MB per photo. JPEG or PNG only."
+msgstr ""
+
+#: app/templates/admin/edit_locations.html:151 app/templates/index.html:227
+#: app/templates/location/submit.html:123
+msgid "Photo Description"
+msgstr ""
+
+#: app/templates/index.html:228 app/templates/location/submit.html:124
+msgid "Describe what the photos show"
+msgstr ""
+
+#: app/templates/admin/edit_locations.html:199
+#: app/templates/admin/edit_locations.html:225
+#: app/templates/admin/locations.html:134 app/templates/index.html:235
+#: app/templates/location/submit.html:132
+msgid "Cancel"
+msgstr ""
+
+#: app/templates/admin/dashboard.html:7
+msgid "Manage the Timisoara Accessibility Map platform."
+msgstr ""
+
+#: app/templates/admin/dashboard.html:17
+msgid "awaiting approval"
+msgstr ""
+
+#: app/templates/admin/dashboard.html:20
+msgid "Review Now"
+msgstr ""
+
+#: app/templates/admin/dashboard.html:26
+msgid "Total Locations"
+msgstr ""
+
+#: app/templates/admin/dashboard.html:30
+msgid "in database"
+msgstr ""
+
+#: app/templates/admin/dashboard.html:39
+msgid "Users"
+msgstr ""
+
+#: app/templates/admin/dashboard.html:43
+msgid "registered users"
+msgstr ""
+
+#: app/templates/admin/dashboard.html:52
+msgid "Activity Logs"
+msgstr ""
+
+#: app/templates/admin/dashboard.html:56
+msgid "recent actions"
+msgstr ""
+
+#: app/templates/admin/dashboard.html:59 app/templates/admin/dashboard.html:91
+msgid "View All Logs"
+msgstr ""
+
+#: app/templates/admin/dashboard.html:67
+msgid "Recent Activity"
+msgstr ""
+
+#: app/templates/admin/dashboard.html:87
+msgid "No recent activity found."
+msgstr ""
+
+#: app/templates/admin/dashboard.html:97
+msgid "Recent Locations"
+msgstr ""
+
+#: app/templates/admin/dashboard.html:106 app/templates/admin/locations.html:16
+#: app/templates/admin/locations.html:58
+msgid "Type"
+msgstr ""
+
+#: app/templates/admin/dashboard.html:107
+#: app/templates/admin/edit_locations.html:176
+#: app/templates/admin/locations.html:31 app/templates/admin/locations.html:60
+#: app/templates/admin/users.html:15 app/templates/admin/users.html:45
+msgid "Status"
+msgstr ""
+
+#: app/templates/admin/dashboard.html:108
+msgid "Submitted"
+msgstr ""
+
+#: app/templates/admin/dashboard.html:109 app/templates/admin/locations.html:63
+#: app/templates/admin/users.html:48
+msgid "Actions"
+msgstr ""
+
+#: app/templates/admin/dashboard.html:119
+#: app/templates/admin/edit_locations.html:179
+#: app/templates/admin/locations.html:34 app/templates/admin/locations.html:74
+#: app/templates/user/dashboard.html:30 app/templates/user/dashboard.html:158
+msgid "Approved"
+msgstr ""
+
+#: app/templates/admin/dashboard.html:121
+#: app/templates/admin/edit_locations.html:181
+#: app/templates/admin/locations.html:35 app/templates/admin/locations.html:76
+#: app/templates/user/dashboard.html:28 app/templates/user/dashboard.html:162
+msgid "Pending"
+msgstr ""
+
+#: app/templates/admin/dashboard.html:126 app/templates/admin/locations.html:83
+msgid "View"
+msgstr ""
+
+#: app/templates/admin/dashboard.html:131 app/templates/admin/locations.html:92
+#: app/templates/admin/pending_locations.html:106
+#: app/templates/location/details.html:180
+msgid "Approve"
+msgstr ""
+
+#: app/templates/admin/dashboard.html:136
+#: app/templates/admin/pending_locations.html:111
+#: app/templates/location/details.html:185
+msgid "Reject"
+msgstr ""
+
+#: app/templates/admin/dashboard.html:146
+msgid "No recent locations found."
+msgstr ""
+
+#: app/templates/admin/dashboard.html:150
+msgid "View All Locations"
+msgstr ""
+
+#: app/templates/admin/edit_locations.html:8
+msgid "Back to Locations"
+msgstr ""
+
+#: app/templates/admin/edit_locations.html:9
+#: app/templates/user/dashboard.html:91
+msgid "View Location"
+msgstr ""
+
+#: app/templates/admin/edit_locations.html:22
+msgid "Basic Information"
+msgstr ""
+
+#: app/templates/admin/edit_locations.html:57
+msgid "Location"
+msgstr ""
+
+#: app/templates/admin/edit_locations.html:61
+#: app/templates/location/submit.html:52
+msgid "Latitude"
+msgstr ""
+
+#: app/templates/admin/edit_locations.html:66
+#: app/templates/location/submit.html:57
+msgid "Longitude"
+msgstr ""
+
+#: app/templates/admin/edit_locations.html:124
+msgid "Current Photos"
+msgstr ""
+
+#: app/templates/admin/edit_locations.html:133
+#: app/templates/admin/edit_locations.html:226
+#: app/templates/admin/locations.html:100
+#: app/templates/admin/locations.html:135
+msgid "Delete"
+msgstr ""
+
+#: app/templates/admin/edit_locations.html:141
+#: app/templates/location/details.html:87
+msgid "No photos available for this location."
+msgstr ""
+
+#: app/templates/admin/edit_locations.html:145
+msgid "Upload New Photos"
+msgstr ""
+
+#: app/templates/admin/edit_locations.html:152
+msgid "Describe what the new photos show"
+msgstr ""
+
+#: app/templates/admin/edit_locations.html:158
+msgid "Management"
+msgstr ""
+
+#: app/templates/admin/edit_locations.html:161
+#: app/templates/admin/locations.html:61
+msgid "Submitted By"
+msgstr ""
+
+#: app/templates/admin/edit_locations.html:166
+msgid "Submission Date"
+msgstr ""
+
+#: app/templates/admin/edit_locations.html:171
+msgid "Last Updated"
+msgstr ""
+
+#: app/templates/admin/edit_locations.html:189
+msgid "Mark as approved"
+msgstr ""
+
+#: app/templates/admin/edit_locations.html:198
+#: app/templates/user/profile.html:56
+msgid "Save Changes"
+msgstr ""
+
+#: app/templates/admin/edit_locations.html:204
+msgid "Delete Location"
+msgstr ""
+
+#: app/templates/admin/edit_locations.html:216
+#: app/templates/admin/locations.html:123
+msgid "Confirm Deletion"
+msgstr ""
+
+#: app/templates/admin/edit_locations.html:220
+#: app/templates/admin/locations.html:127
+msgid "Are you sure you want to delete this location?"
+msgstr ""
+
+#: app/templates/admin/edit_locations.html:222
+msgid ""
+"This action cannot be undone and will remove all associated photos and "
+"reviews."
+msgstr ""
+
+#: app/templates/admin/locations.html:8 app/templates/admin/logs.html:8
+#: app/templates/admin/pending_locations.html:8
+#: app/templates/admin/pending_locations.html:122
+#: app/templates/admin/users.html:8
+msgid "Back to Dashboard"
+msgstr ""
+
+#: app/templates/admin/locations.html:18
+msgid "All Types"
+msgstr ""
+
+#: app/templates/admin/locations.html:33
+msgid "All Statuses"
+msgstr ""
+
+#: app/templates/admin/locations.html:41
+msgid "Name or address"
+msgstr ""
+
+#: app/templates/admin/locations.html:45 app/templates/admin/logs.html:50
+#: app/templates/admin/users.html:30
+msgid "Filter"
+msgstr ""
+
+#: app/templates/admin/locations.html:46 app/templates/admin/logs.html:51
+#: app/templates/admin/users.html:31
+msgid "Clear Filters"
+msgstr ""
+
+#: app/templates/admin/locations.html:62
+msgid "Date"
+msgstr ""
+
+#: app/templates/admin/locations.html:71
+msgid "No address"
+msgstr ""
+
+#: app/templates/admin/locations.html:86
+msgid "Edit"
+msgstr ""
+
+#: app/templates/admin/locations.html:112
+msgid "No locations found matching your criteria."
+msgstr ""
+
+#: app/templates/admin/locations.html:129
+msgid "This action cannot be undone."
+msgstr ""
+
+#: app/templates/admin/logs.html:6
+msgid "Admin Activity Logs"
+msgstr ""
+
+#: app/templates/admin/logs.html:15
+msgid "Action Type"
+msgstr ""
+
+#: app/templates/admin/logs.html:17
+msgid "All Actions"
+msgstr ""
+
+#: app/templates/admin/logs.html:18
+msgid "Location Approval"
+msgstr ""
+
+#: app/templates/admin/logs.html:19
+msgid "Location Rejection"
+msgstr ""
+
+#: app/templates/admin/logs.html:20
+msgid "Location Edit"
+msgstr ""
+
+#: app/templates/admin/logs.html:21
+msgid "Admin Grant"
+msgstr ""
+
+#: app/templates/admin/logs.html:22
+msgid "Admin Revoke"
+msgstr ""
+
+#: app/templates/admin/logs.html:23
+msgid "User Activation"
+msgstr ""
+
+#: app/templates/admin/logs.html:24
+msgid "User Deactivation"
+msgstr ""
+
+#: app/templates/admin/logs.html:25
+msgid "Review Deletion"
+msgstr ""
+
+#: app/templates/admin/logs.html:26
+msgid "Photo Deletion"
+msgstr ""
+
+#: app/templates/admin/logs.html:31
+msgid "Admin User"
+msgstr ""
+
+#: app/templates/admin/logs.html:33
+msgid "All Admins"
+msgstr ""
+
+#: app/templates/admin/logs.html:41
+msgid "Date Range"
+msgstr ""
+
+#: app/templates/admin/logs.html:43
+msgid "Start date"
+msgstr ""
+
+#: app/templates/admin/logs.html:44
+msgid "to"
+msgstr ""
+
+#: app/templates/admin/logs.html:45
+msgid "End date"
+msgstr ""
+
+#: app/templates/admin/logs.html:62
+msgid "Action"
+msgstr ""
+
+#: app/templates/admin/logs.html:64
+msgid "IP Address"
+msgstr ""
+
+#: app/templates/admin/logs.html:65
+msgid "Details"
+msgstr ""
+
+#: app/templates/admin/logs.html:66
+msgid "Timestamp"
+msgstr ""
+
+#: app/templates/admin/logs.html:94
+msgid "Previous"
+msgstr ""
+
+#: app/templates/admin/logs.html:98
+#, python-format
+msgid "Page %(current)s of %(total)s"
+msgstr ""
+
+#: app/templates/admin/logs.html:102
+msgid "Next"
+msgstr ""
+
+#: app/templates/admin/logs.html:108
+msgid "No admin activity logs found matching your criteria."
+msgstr ""
+
+#: app/templates/admin/pending_locations.html:9
+msgid "All Locations"
+msgstr ""
+
+#: app/templates/admin/pending_locations.html:16
+msgid "locations pending approval"
+msgstr ""
+
+#: app/templates/admin/pending_locations.html:38
+msgid "Address:"
+msgstr ""
+
+#: app/templates/admin/pending_locations.html:38
+#: app/templates/location/details.html:7 app/templates/user/dashboard.html:35
+msgid "No address provided"
+msgstr ""
+
+#: app/templates/admin/pending_locations.html:41
+#: app/templates/location/details.html:21
+msgid "No description provided"
+msgstr ""
+
+#: app/templates/admin/pending_locations.html:45
+msgid "Accessibility:"
+msgstr ""
+
+#: app/templates/admin/pending_locations.html:48
+#: app/templates/location/details.html:29
+msgid "Wheelchair ramp"
+msgstr ""
+
+#: app/templates/admin/pending_locations.html:52
+#: app/templates/location/details.html:35 app/templates/user/dashboard.html:43
+msgid "Accessible toilet"
+msgstr ""
+
+#: app/templates/admin/pending_locations.html:56
+#: app/templates/location/details.html:47
+msgid "Accessible entrance"
+msgstr ""
+
+#: app/templates/admin/pending_locations.html:60
+msgid "Braille"
+msgstr ""
+
+#: app/templates/admin/pending_locations.html:64
+#: app/templates/location/details.html:59
+msgid "Audio guidance"
+msgstr ""
+
+#: app/templates/admin/pending_locations.html:68
+#: app/templates/location/details.html:65
+msgid "Staff assistance"
+msgstr ""
+
+#: app/templates/admin/pending_locations.html:75
+msgid "Submitted by:"
+msgstr ""
+
+#: app/templates/admin/pending_locations.html:78
+msgid "Date:"
+msgstr ""
+
+#: app/templates/admin/pending_locations.html:101
+#: app/templates/user/dashboard.html:52
+msgid "View Details"
+msgstr ""
+
+#: app/templates/admin/pending_locations.html:120
+msgid "No locations pending approval."
+msgstr ""
+
+#: app/templates/admin/pending_locations.html:121
+msgid "Great job! You're all caught up."
+msgstr ""
+
+#: app/templates/admin/pending_locations.html:162
+msgid ""
+"Are you sure you want to reject this location? This will permanently "
+"delete it."
+msgstr ""
+
+#: app/templates/admin/users.html:17
+msgid "All Users"
+msgstr ""
+
+#: app/templates/admin/users.html:18 app/templates/admin/users.html:65
+msgid "Active"
+msgstr ""
+
+#: app/templates/admin/users.html:19 app/templates/admin/users.html:67
+msgid "Inactive"
+msgstr ""
+
+#: app/templates/admin/users.html:20
+msgid "Admins"
+msgstr ""
+
+#: app/templates/admin/users.html:26
+msgid "Username or email"
+msgstr ""
+
+#: app/templates/admin/users.html:44
+msgid "Role"
+msgstr ""
+
+#: app/templates/admin/users.html:46
+msgid "Joined"
+msgstr ""
+
+#: app/templates/admin/users.html:60
+msgid "User"
+msgstr ""
+
+#: app/templates/admin/users.html:74
+msgid "Needs wheelchair access"
+msgstr ""
+
+#: app/templates/admin/users.html:78
+msgid "Needs visual assistance"
+msgstr ""
+
+#: app/templates/admin/users.html:82
+msgid "Needs hearing assistance"
+msgstr ""
+
+#: app/templates/admin/users.html:86
+msgid "Needs cognitive assistance"
+msgstr ""
+
+#: app/templates/admin/users.html:97
+msgid "Remove admin role"
+msgstr ""
+
+#: app/templates/admin/users.html:99
+msgid "Make admin"
+msgstr ""
+
+#: app/templates/admin/users.html:107
+msgid "Deactivate user"
+msgstr ""
+
+#: app/templates/admin/users.html:109
+msgid "Activate user"
+msgstr ""
+
+#: app/templates/admin/users.html:113
+msgid "Current user"
+msgstr ""
+
+#: app/templates/admin/users.html:122
+msgid "No users found matching your criteria."
+msgstr ""
+
+#: app/templates/admin/users.html:150
+msgid "Are you sure you want to remove admin privileges from this user?"
+msgstr ""
+
+#: app/templates/admin/users.html:151
+msgid "Are you sure you want to grant admin privileges to this user?"
+msgstr ""
+
+#: app/templates/admin/users.html:163
+msgid ""
+"Are you sure you want to deactivate this user? They will not be able to "
+"log in."
+msgstr ""
+
+#: app/templates/admin/users.html:164
+msgid "Are you sure you want to activate this user?"
+msgstr ""
+
+#: app/templates/auth/login.html:46
+msgid "Don't have an account?"
+msgstr ""
+
+#: app/templates/auth/register.html:6
+msgid "Create an Account"
+msgstr ""
+
+#: app/templates/auth/register.html:60 app/templates/user/dashboard.html:119
+#: app/templates/user/profile.html:63
+msgid "Accessibility Preferences"
+msgstr ""
+
+#: app/templates/auth/register.html:91
+msgid "Already have an account?"
+msgstr ""
+
+#: app/templates/auth/register.html:91
+msgid "Log In"
+msgstr ""
+
+#: app/templates/location/details.html:30
+#: app/templates/location/details.html:36
+#: app/templates/location/details.html:42
+#: app/templates/location/details.html:48
+#: app/templates/location/details.html:54
+#: app/templates/location/details.html:60
+#: app/templates/location/details.html:66
+msgid "Yes"
+msgstr ""
+
+#: app/templates/location/details.html:30
+#: app/templates/location/details.html:36
+#: app/templates/location/details.html:42
+#: app/templates/location/details.html:48
+#: app/templates/location/details.html:54
+#: app/templates/location/details.html:60
+#: app/templates/location/details.html:66
+msgid "No"
+msgstr ""
+
+#: app/templates/location/details.html:41
+msgid "Accessible parking"
+msgstr ""
+
+#: app/templates/location/details.html:53
+msgid "Braille signage"
+msgstr ""
+
+#: app/templates/location/details.html:92 app/templates/user/dashboard.html:154
+msgid "Reviews"
+msgstr ""
+
+#: app/templates/location/details.html:118
+msgid "No reviews yet. Be the first to review this location!"
+msgstr ""
+
+#: app/templates/location/details.html:123
+msgid "Add Your Review"
+msgstr ""
+
+#: app/templates/location/details.html:128
+msgid "Rating"
+msgstr ""
+
+#: app/templates/location/details.html:132
+msgid "stars"
+msgstr ""
+
+#: app/templates/location/details.html:138
+msgid "Your Review"
+msgstr ""
+
+#: app/templates/location/details.html:143
+msgid "Submit Review"
+msgstr ""
+
+#: app/templates/location/details.html:149
+msgid "to add a review."
+msgstr ""
+
+#: app/templates/location/details.html:153
+msgid "Reviews can only be added once this location has been approved."
+msgstr ""
+
+#: app/templates/location/details.html:166
+msgid "Get Directions"
+msgstr ""
+
+#: app/templates/location/details.html:189
+msgid "Edit as Admin"
+msgstr ""
+
+#: app/templates/location/submit.html:6
+msgid "Submit Accessible Location"
+msgstr ""
+
+#: app/templates/location/submit.html:7
+msgid "Help others by sharing accessible locations in Timisoara."
+msgstr ""
+
+#: app/templates/location/submit.html:22
+msgid "The name of the location (e.g. \"Central Park Restaurant\")"
+msgstr ""
+
+#: app/templates/location/submit.html:28
+msgid "A brief description of the location and its accessibility features"
+msgstr ""
+
+#: app/templates/location/submit.html:62
+msgid "Or select a location on the map:"
+msgstr ""
+
+#: app/templates/location/submit.html:65
+msgid "Use My Current Location"
+msgstr ""
+
+#: app/templates/location/submit.html:125
+msgid "Adding descriptions helps users with visual impairments."
+msgstr ""
+
+#: app/templates/user/dashboard.html:7
+msgid "Welcome back, "
+msgstr ""
+
+#: app/templates/user/dashboard.html:14
+msgid "My Locations"
+msgstr ""
+
+#: app/templates/user/dashboard.html:40
+msgid "Wheelchair accessible"
+msgstr ""
+
+#: app/templates/user/dashboard.html:46
+msgid "Braille available"
+msgstr ""
+
+#: app/templates/user/dashboard.html:59
+msgid "You haven't added any locations yet."
+msgstr ""
+
+#: app/templates/user/dashboard.html:60
+msgid "Add Your First Location"
+msgstr ""
+
+#: app/templates/user/dashboard.html:66
+msgid "My Reviews"
+msgstr ""
+
+#: app/templates/user/dashboard.html:98
+msgid "You haven't written any reviews yet."
+msgstr ""
+
+#: app/templates/user/dashboard.html:99
+msgid "Find Places to Review"
+msgstr ""
+
+#: app/templates/user/dashboard.html:114 app/templates/user/profile.html:18
+msgid "Member since"
+msgstr ""
+
+#: app/templates/user/dashboard.html:123
+msgid "Wheelchair access"
+msgstr ""
+
+#: app/templates/user/dashboard.html:127
+msgid "Visual assistance"
+msgstr ""
+
+#: app/templates/user/dashboard.html:131
+msgid "Hearing assistance"
+msgstr ""
+
+#: app/templates/user/dashboard.html:135
+msgid "Cognitive assistance"
+msgstr ""
+
+#: app/templates/user/dashboard.html:141
+msgid "Edit Profile"
+msgstr ""
+
+#: app/templates/user/dashboard.html:146
+msgid "Your Activity"
+msgstr ""
+
+#: app/templates/user/dashboard.html:150
+msgid "Locations"
+msgstr ""
+
+#: app/templates/user/profile.html:21
+msgid "Administrator"
+msgstr ""
+
+#: app/templates/user/profile.html:28
+msgid "Locations Added"
+msgstr ""
+
+#: app/templates/user/profile.html:36
+msgid "Account Settings"
+msgstr ""
+
+#: app/templates/user/profile.html:43
+msgid "Email Address"
+msgstr ""
+
+#: app/templates/user/profile.html:48
+msgid "Preferred Language"
+msgstr ""
+
+#: app/templates/user/profile.html:50
+msgid "Romanian"
+msgstr ""
+
+#: app/templates/user/profile.html:51
+msgid "English"
+msgstr ""
+
+#: app/templates/user/profile.html:64
+msgid ""
+"Select options below to customize your experience and filter locations by"
+" your needs."
+msgstr ""
+
+#: app/templates/user/profile.html:77
+msgid "Show locations with ramps, accessible entrances, and parking"
+msgstr ""
+
+#: app/templates/user/profile.html:86
+msgid "Show locations with braille signage and audio guidance"
+msgstr ""
+
+#: app/templates/user/profile.html:95
+msgid "Show locations with visual alerts and staff trained in sign language"
+msgstr ""
+
+#: app/templates/user/profile.html:104
+msgid "Show locations with simplified navigation and staff assistance"
+msgstr ""
+
+#: app/templates/user/profile.html:109
+msgid "Save Preferences"
+msgstr ""
+
+#: app/templates/user/profile.html:116 app/templates/user/profile.html:139
+msgid "Change Password"
+msgstr ""
+
+#: app/templates/user/profile.html:123
+msgid "Current Password"
+msgstr ""
+
+#: app/templates/user/profile.html:128
+msgid "New Password"
+msgstr ""
+
+#: app/templates/user/profile.html:130
+msgid "Password must be at least 8 characters with letters and numbers"
+msgstr ""
+
+#: app/templates/user/profile.html:134
+msgid "Confirm New Password"
+msgstr ""
+

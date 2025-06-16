@@ -1,0 +1,173 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="content-container admin-page">
+    <div class="page-header">
+        <h1>{{ _('Manage Users') }}</h1>
+        <div class="header-actions">
+            <a href="{{ url_for('admin.index') }}" class="btn secondary">{{ _('Back to Dashboard') }}</a>
+        </div>
+    </div>
+    
+    <div class="admin-filters">
+        <form id="filter-form" method="GET" action="{{ url_for('admin.users') }}">
+            <div class="filter-group">
+                <label for="status-filter">{{ _('Status') }}</label>
+                <select id="status-filter" name="status">
+                    <option value="">{{ _('All Users') }}</option>
+                    <option value="active" {% if request.args.get('status') == 'active' %}selected{% endif %}>{{ _('Active') }}</option>
+                    <option value="inactive" {% if request.args.get('status') == 'inactive' %}selected{% endif %}>{{ _('Inactive') }}</option>
+                    <option value="admin" {% if request.args.get('status') == 'admin' %}selected{% endif %}>{{ _('Admins') }}</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label for="search">{{ _('Search') }}</label>
+                <input type="text" id="search" name="q" value="{{ request.args.get('q', '') }}" placeholder="{{ _('Username or email') }}">
+            </div>
+            
+            <div class="filter-actions">
+                <button type="submit" class="btn primary">{{ _('Filter') }}</button>
+                <a href="{{ url_for('admin.users') }}" class="btn text">{{ _('Clear Filters') }}</a>
+            </div>
+        </form>
+    </div>
+    
+    <div class="admin-content">
+        <div class="data-table-container">
+            {% if users %}
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>{{ _('Username') }}</th>
+                            <th>{{ _('Email') }}</th>
+                            <th>{{ _('Role') }}</th>
+                            <th>{{ _('Status') }}</th>
+                            <th>{{ _('Joined') }}</th>
+                            <th>{{ _('Accessibility Needs') }}</th>
+                            <th>{{ _('Actions') }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in users %}
+                            <tr>
+                                <td>{{ user.username }}</td>
+                                <td>{{ user.email }}</td>
+                                <td>
+                                    {% if user.is_admin %}
+                                        <span class="role admin">{{ _('Admin') }}</span>
+                                    {% else %}
+                                        <span class="role user">{{ _('User') }}</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if user.is_active %}
+                                        <span class="status-active">{{ _('Active') }}</span>
+                                    {% else %}
+                                        <span class="status-inactive">{{ _('Inactive') }}</span>
+                                    {% endif %}
+                                </td>
+                                <td>{{ user.joined_at.strftime('%d %b %Y') }}</td>
+                                <td>
+                                    <div class="user-needs">
+                                        {% if user.needs_wheelchair %}
+                                            <span class="need-tag wheelchair" title="{{ _('Needs wheelchair access') }}">♿</span>
+                                        {% endif %}
+                                        
+                                        {% if user.needs_visual_assistance %}
+                                            <span class="need-tag visual" title="{{ _('Needs visual assistance') }}">👁️</span>
+                                        {% endif %}
+                                        
+                                        {% if user.needs_hearing_assistance %}
+                                            <span class="need-tag hearing" title="{{ _('Needs hearing assistance') }}">👂</span>
+                                        {% endif %}
+                                        
+                                        {% if user.needs_cognitive_assistance %}
+                                            <span class="need-tag cognitive" title="{{ _('Needs cognitive assistance') }}">🧠</span>
+                                        {% endif %}
+                                    </div>
+                                </td>
+                                <td class="actions-cell">
+                                    <!-- Cannot modify your own account -->
+                                    {% if user.id != current_user.id %}
+                                        <!-- Toggle admin status -->
+                                        <form action="{{ url_for('admin.toggle_admin', user_id=user.id) }}" method="POST" class="inline-form">
+                                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                            {% if user.is_admin %}
+                                                <button type="submit" class="btn icon" title="{{ _('Remove admin role') }}">👑</button>
+                                            {% else %}
+                                                <button type="submit" class="btn icon" title="{{ _('Make admin') }}">👤</button>
+                                            {% endif %}
+                                        </form>
+                                        
+                                        <!-- Toggle active status -->
+                                        <form action="{{ url_for('admin.toggle_active', user_id=user.id) }}" method="POST" class="inline-form">
+                                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                            {% if user.is_active %}
+                                                <button type="submit" class="btn icon" title="{{ _('Deactivate user') }}">🔒</button>
+                                            {% else %}
+                                                <button type="submit" class="btn icon" title="{{ _('Activate user') }}">🔓</button>
+                                            {% endif %}
+                                        </form>
+                                    {% else %}
+                                        <span class="current-user-note">{{ _('Current user') }}</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <div class="no-data">
+                    <p>{{ _('No users found matching your criteria.') }}</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Auto-submit filters on change
+        const statusFilter = document.getElementById('status-filter');
+        
+        if (statusFilter) {
+            statusFilter.addEventListener('change', function() {
+                document.getElementById('filter-form').submit();
+            });
+        }
+        
+        // Confirmation for status changes
+        const adminForms = document.querySelectorAll('form[action*="toggle_admin"]');
+        const activeForms = document.querySelectorAll('form[action*="toggle_active"]');
+        
+        adminForms.forEach(function(form) {
+            form.addEventListener('submit', function(event) {
+                const isAdmin = form.querySelector('button').getAttribute('title').includes('Remove');
+                let message = isAdmin 
+                    ? "{{ _('Are you sure you want to remove admin privileges from this user?') }}"
+                    : "{{ _('Are you sure you want to grant admin privileges to this user?') }}";
+                
+                if (!confirm(message)) {
+                    event.preventDefault();
+                }
+            });
+        });
+        
+        activeForms.forEach(function(form) {
+            form.addEventListener('submit', function(event) {
+                const isActive = form.querySelector('button').getAttribute('title').includes('Deactivate');
+                let message = isActive 
+                    ? "{{ _('Are you sure you want to deactivate this user? They will not be able to log in.') }}"
+                    : "{{ _('Are you sure you want to activate this user?') }}";
+                
+                if (!confirm(message)) {
+                    event.preventDefault();
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

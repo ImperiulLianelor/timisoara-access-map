@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="content-container">
+    <div class="page-header">
+        <h1>{{ _('My Profile') }}</h1>
+    </div>
+    
+    <div class="profile-container">
+        <div class="profile-sidebar">
+            <div class="user-avatar">
+                {{ user.username[0].upper() }}
+            </div>
+            
+            <div class="user-meta">
+                <h2>{{ user.username }}</h2>
+                <p class="user-email">{{ user.email }}</p>
+                <p class="join-date">{{ _('Member since') }} {{ user.joined_at.strftime('%B %Y') }}</p>
+                
+                {% if user.is_admin %}
+                    <div class="admin-badge">{{ _('Administrator') }}</div>
+                {% endif %}
+            </div>
+            
+            <div class="profile-stats">
+                <div class="stat-item">
+                    <div class="stat-value">{{ locations|length }}</div>
+                    <div class="stat-label">{{ _('Locations Added') }}</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="profile-main">
+            <div class="profile-section">
+                <div class="section-header">
+                    <h3>{{ _('Account Settings') }}</h3>
+                </div>
+                
+                <form action="{{ url_for('main.profile') }}" method="POST" class="profile-form" data-validate="true">
+
+                    
+                    <div class="form-group">
+                        <label for="email">{{ _('Email Address') }}</label>
+                        <input type="email" id="email" name="email" value="{{ user.email }}" class="form-control">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="preferred_language">{{ _('Preferred Language') }}</label>
+                        <select id="preferred_language" name="preferred_language" class="form-control">
+                            <option value="ro" {% if user.preferred_language == 'ro' %}selected{% endif %}>{{ _('Romanian') }}</option>
+                            <option value="en" {% if user.preferred_language == 'en' %}selected{% endif %}>{{ _('English') }}</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn primary">{{ _('Save Changes') }}</button>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="profile-section">
+                <div class="section-header">
+                    <h3>{{ _('Accessibility Preferences') }}</h3>
+                    <p class="section-desc">{{ _('Select options below to customize your experience and filter locations by your needs.') }}</p>
+                </div>
+                
+                <form action="{{ url_for('main.update_preferences') }}" method="POST" class="preferences-form">
+                   
+                    
+                    <div class="preferences-grid">
+                        <div class="preference-item">
+                            <input type="checkbox" id="needs_wheelchair" name="needs_wheelchair" {% if user.needs_wheelchair %}checked{% endif %}>
+                            <label for="needs_wheelchair">
+                                <span class="preference-icon wheelchair"></span>
+                                <span class="preference-name">{{ _('I use a wheelchair') }}</span>
+                            </label>
+                            <p class="preference-desc">{{ _('Show locations with ramps, accessible entrances, and parking') }}</p>
+                        </div>
+                        
+                        <div class="preference-item">
+                            <input type="checkbox" id="needs_visual_assistance" name="needs_visual_assistance" {% if user.needs_visual_assistance %}checked{% endif %}>
+                            <label for="needs_visual_assistance">
+                                <span class="preference-icon visual"></span>
+                                <span class="preference-name">{{ _('I need visual assistance') }}</span>
+                            </label>
+                            <p class="preference-desc">{{ _('Show locations with braille signage and audio guidance') }}</p>
+                        </div>
+                        
+                        <div class="preference-item">
+                            <input type="checkbox" id="needs_hearing_assistance" name="needs_hearing_assistance" {% if user.needs_hearing_assistance %}checked{% endif %}>
+                            <label for="needs_hearing_assistance">
+                                <span class="preference-icon hearing"></span>
+                                <span class="preference-name">{{ _('I need hearing assistance') }}</span>
+                            </label>
+                            <p class="preference-desc">{{ _('Show locations with visual alerts and staff trained in sign language') }}</p>
+                        </div>
+                        
+                        <div class="preference-item">
+                            <input type="checkbox" id="needs_cognitive_assistance" name="needs_cognitive_assistance" {% if user.needs_cognitive_assistance %}checked{% endif %}>
+                            <label for="needs_cognitive_assistance">
+                                <span class="preference-icon cognitive"></span>
+                                <span class="preference-name">{{ _('I need cognitive assistance') }}</span>
+                            </label>
+                            <p class="preference-desc">{{ _('Show locations with simplified navigation and staff assistance') }}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn primary">{{ _('Save Preferences') }}</button>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="profile-section">
+                <div class="section-header">
+                    <h3>{{ _('Change Password') }}</h3>
+                </div>
+                
+                <form action="{{ url_for('main.change_password') }}" method="POST" class="password-form" data-validate="true">
+                    
+                    
+                    <div class="form-group">
+                        <label for="current_password">{{ _('Current Password') }}</label>
+                        <input type="password" id="current_password" name="current_password" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="new_password">{{ _('New Password') }}</label>
+                        <input type="password" id="new_password" name="new_password" class="form-control" required minlength="8">
+                        <small class="help-text">{{ _('Password must be at least 8 characters with letters and numbers') }}</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="confirm_password">{{ _('Confirm New Password') }}</label>
+                        <input type="password" id="confirm_password" name="confirm_password" class="form-control" required data-match="new_password">
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn primary">{{ _('Change Password') }}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/form-validation.js') }}"></script>
+{% endblock %}

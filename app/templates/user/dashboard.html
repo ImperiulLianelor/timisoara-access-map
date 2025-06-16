@@ -1,0 +1,177 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="content-container">
+    <div class="dashboard-header">
+        <h1>{{ _('My Dashboard') }}</h1>
+        <p class="welcome-message">{{ _('Welcome back, ') }}{{ current_user.username }}!</p>
+    </div>
+    
+    <div class="dashboard-content">
+        <div class="dashboard-main">
+            <div class="dashboard-section">
+                <div class="section-header">
+                    <h2>{{ _('My Locations') }}</h2>
+                    <a href="{{ url_for('main.submit_location') }}" class="btn primary">
+                        <span class="add-icon"></span>
+                        {{ _('Add New Location') }}
+                    </a>
+                </div>
+                
+                {% if locations %}
+                    <div class="locations-grid">
+                        {% for location in locations %}
+                            <div class="location-card">
+                                <div class="location-card-header">
+                                    <h3>{{ location.name }}</h3>
+                                    {% if not location.is_approved %}
+                                        <span class="status-badge pending">{{ _('Pending') }}</span>
+                                    {% else %}
+                                        <span class="status-badge approved">{{ _('Approved') }}</span>
+                                    {% endif %}
+                                </div>
+                                
+                                <div class="location-card-content">
+                                    <p class="location-address">{{ location.address or _('No address provided') }}</p>
+                                    <p class="location-type">{{ location.location_type|capitalize }}</p>
+                                    
+                                    <div class="location-features">
+                                        {% if location.has_ramp %}
+                                            <span class="feature-icon wheelchair" title="{{ _('Wheelchair accessible') }}"></span>
+                                        {% endif %}
+                                        {% if location.has_accessible_wc %}
+                                            <span class="feature-icon wc" title="{{ _('Accessible toilet') }}"></span>
+                                        {% endif %}
+                                        {% if location.has_braille %}
+                                            <span class="feature-icon braille" title="{{ _('Braille available') }}"></span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                
+                                <div class="location-card-footer">
+                                    <a href="{{ url_for('main.location_details', location_id=location.id) }}" class="btn secondary">{{ _('View Details') }}</a>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="empty-state">
+                        <p>{{ _('You haven\'t added any locations yet.') }}</p>
+                        <a href="{{ url_for('main.submit_location') }}" class="btn primary">{{ _('Add Your First Location') }}</a>
+                    </div>
+                {% endif %}
+            </div>
+            
+            <div class="dashboard-section">
+                <h2>{{ _('My Reviews') }}</h2>
+                
+                {% if reviews %}
+                    <div class="reviews-list">
+                        {% for review in reviews %}
+                            <div class="review-card">
+                                <div class="review-card-header">
+                                    <h3>{{ review.location.name }}</h3>
+                                    <div class="review-rating">
+                                        {% for i in range(5) %}
+                                            {% if i < review.rating %}
+                                                <span class="star filled">★</span>
+                                            {% else %}
+                                                <span class="star">☆</span>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                
+                                <div class="review-card-content">
+                                    <p class="review-date">{{ review.created_at.strftime('%d %b %Y') }}</p>
+                                    <p class="review-text">{{ review.content }}</p>
+                                </div>
+                                
+                                <div class="review-card-footer">
+                                    <a href="{{ url_for('main.location_details', location_id=review.location_id) }}" class="btn text">{{ _('View Location') }}</a>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="empty-state">
+                        <p>{{ _('You haven\'t written any reviews yet.') }}</p>
+                        <a href="{{ url_for('main.index') }}" class="btn secondary">{{ _('Find Places to Review') }}</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        
+        <div class="dashboard-sidebar">
+            <div class="user-profile-card">
+                <div class="user-info">
+                    <div class="user-avatar">
+                        {{ current_user.username[0].upper() }}
+                    </div>
+                    <div class="user-details">
+                        <h3>{{ current_user.username }}</h3>
+                        <p class="user-email">{{ current_user.email }}</p>
+                        <p class="join-date">{{ _('Member since') }} {{ current_user.joined_at.strftime('%B %Y') }}</p>
+                    </div>
+                </div>
+                
+                <div class="user-preferences">
+                    <h4>{{ _('Accessibility Preferences') }}</h4>
+                    <ul class="preferences-list">
+                        <li class="{{ 'active' if current_user.needs_wheelchair else '' }}">
+                            <span class="preference-icon wheelchair"></span>
+                            <span class="preference-name">{{ _('Wheelchair access') }}</span>
+                        </li>
+                        <li class="{{ 'active' if current_user.needs_visual_assistance else '' }}">
+                            <span class="preference-icon visual"></span>
+                            <span class="preference-name">{{ _('Visual assistance') }}</span>
+                        </li>
+                        <li class="{{ 'active' if current_user.needs_hearing_assistance else '' }}">
+                            <span class="preference-icon hearing"></span>
+                            <span class="preference-name">{{ _('Hearing assistance') }}</span>
+                        </li>
+                        <li class="{{ 'active' if current_user.needs_cognitive_assistance else '' }}">
+                            <span class="preference-icon cognitive"></span>
+                            <span class="preference-name">{{ _('Cognitive assistance') }}</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="user-actions">
+                    <a href="{{ url_for('main.profile') }}" class="btn secondary">{{ _('Edit Profile') }}</a>
+                </div>
+            </div>
+            
+            <div class="stats-card">
+                <h3>{{ _('Your Activity') }}</h3>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-value">{{ locations|length }}</div>
+                        <div class="stat-label">{{ _('Locations') }}</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">{{ reviews|length }}</div>
+                        <div class="stat-label">{{ _('Reviews') }}</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">{{ locations|selectattr('is_approved', 'equalto', true)|list|length }}</div>
+                        <div class="stat-label">{{ _('Approved') }}</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">{{ locations|selectattr('is_approved', 'equalto', false)|list|length }}</div>
+                        <div class="stat-label">{{ _('Pending') }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Any dashboard-specific JavaScript can go here
+    });
+</script>
+{% endblock %}

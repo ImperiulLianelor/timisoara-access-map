@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="auth-container">
+    <div class="auth-card">
+        <h2>{{ _('Create an Account') }}</h2>
+        
+        <form method="POST" action="{{ url_for('auth.register') }}" data-validate="true">
+            {{ form.hidden_tag() }}
+            
+            <div class="form-group">
+                {{ form.username.label }}
+                {{ form.username(class="form-control") }}
+                {% if form.username.errors %}
+                    <div class="error-message">
+                        {% for error in form.username.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            
+            <div class="form-group">
+                {{ form.email.label }}
+                {{ form.email(class="form-control") }}
+                {% if form.email.errors %}
+                    <div class="error-message">
+                        {% for error in form.email.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            
+            <div class="form-group">
+                {{ form.password.label }}
+                {{ form.password(class="form-control") }}
+                {% if form.password.errors %}
+                    <div class="error-message">
+                        {% for error in form.password.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            
+            <div class="form-group">
+                {{ form.password2.label }}
+                {{ form.password2(class="form-control") }}
+                {% if form.password2.errors %}
+                    <div class="error-message">
+                        {% for error in form.password2.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            
+            <fieldset>
+                <legend>{{ _('Accessibility Preferences') }}</legend>
+                
+                <div class="checkbox-group">
+                    <div class="form-check">
+                        {{ form.needs_wheelchair(class="form-check-input") }}
+                        {{ form.needs_wheelchair.label(class="form-check-label") }}
+                    </div>
+                    
+                    <div class="form-check">
+                        {{ form.needs_visual_assistance(class="form-check-input") }}
+                        {{ form.needs_visual_assistance.label(class="form-check-label") }}
+                    </div>
+                    
+                    <div class="form-check">
+                        {{ form.needs_hearing_assistance(class="form-check-input") }}
+                        {{ form.needs_hearing_assistance.label(class="form-check-label") }}
+                    </div>
+                    
+                    <div class="form-check">
+                        {{ form.needs_cognitive_assistance(class="form-check-input") }}
+                        {{ form.needs_cognitive_assistance.label(class="form-check-label") }}
+                    </div>
+                </div>
+            </fieldset>
+            
+            <div class="form-actions">
+                {{ form.submit(class="btn primary") }}
+            </div>
+        </form>
+        
+        <div class="auth-links">
+            <p>{{ _('Already have an account?') }} <a href="{{ url_for('auth.login') }}">{{ _('Log In') }}</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/form-validation.js') }}"></script>
+{% endblock %}

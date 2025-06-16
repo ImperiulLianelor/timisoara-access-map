@@ -1,0 +1,169 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="content-container admin-page">
+    <div class="page-header">
+        <h1>{{ _('Pending Locations') }}</h1>
+        <div class="header-actions">
+            <a href="{{ url_for('admin.index') }}" class="btn secondary">{{ _('Back to Dashboard') }}</a>
+            <a href="{{ url_for('admin.locations') }}" class="btn primary">{{ _('All Locations') }}</a>
+        </div>
+    </div>
+    
+    <div class="approval-count">
+        <div class="approval-stat">
+            <span class="count">{{ locations|length }}</span>
+            <span class="label">{{ _('locations pending approval') }}</span>
+        </div>
+    </div>
+    
+    <div class="admin-content">
+        {% if locations %}
+            <div class="approval-container">
+                {% for location in locations %}
+                    <div class="approval-card">
+                        <div class="approval-header">
+                            <h3>{{ location.name }}</h3>
+                            <span class="location-type">{{ location.location_type|capitalize }}</span>
+                        </div>
+                        
+                        <div class="approval-details">
+                            <div class="approval-map">
+                                <div id="map-{{ location.id }}" class="small-map" 
+                                    data-lat="{{ location.lat }}" 
+                                    data-lng="{{ location.lng }}"></div>
+                            </div>
+                            
+                            <div class="approval-info">
+                                <p class="info-address"><strong>{{ _('Address:') }}</strong> {{ location.address or _('No address provided') }}</p>
+                                
+                                <p class="info-description">
+                                    {{ location.description|truncate(150) or _('No description provided') }}
+                                </p>
+                                
+                                <div class="info-features">
+                                    <strong>{{ _('Accessibility:') }}</strong>
+                                    <ul class="feature-list">
+                                        {% if location.has_ramp %}
+                                            <li class="feature-item has-feature">{{ _('Wheelchair ramp') }}</li>
+                                        {% endif %}
+                                        
+                                        {% if location.has_accessible_wc %}
+                                            <li class="feature-item has-feature">{{ _('Accessible toilet') }}</li>
+                                        {% endif %}
+                                        
+                                        {% if location.has_accessible_entrance %}
+                                            <li class="feature-item has-feature">{{ _('Accessible entrance') }}</li>
+                                        {% endif %}
+                                        
+                                        {% if location.has_braille %}
+                                            <li class="feature-item has-feature">{{ _('Braille') }}</li>
+                                        {% endif %}
+                                        
+                                        {% if location.has_audio_guidance %}
+                                            <li class="feature-item has-feature">{{ _('Audio guidance') }}</li>
+                                        {% endif %}
+                                        
+                                        {% if location.has_staff_assistance %}
+                                            <li class="feature-item has-feature">{{ _('Staff assistance') }}</li>
+                                        {% endif %}
+                                    </ul>
+                                </div>
+                                
+                                <div class="info-meta">
+                                    <span class="meta-item">
+                                        <strong>{{ _('Submitted by:') }}</strong> {{ location.author.username }}
+                                    </span>
+                                    <span class="meta-item">
+                                        <strong>{{ _('Date:') }}</strong> {{ location.created_at.strftime('%d %b %Y, %H:%M') }}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        {% if location.photos.count() > 0 %}
+                            <div class="approval-photos">
+                                <h4>{{ _('Photos') }}</h4>
+                                <div class="photo-grid">
+                                    {% for photo in location.photos %}
+                                        <div class="photo-item">
+                                            <img src="{{ url_for('static', filename='uploads/' + photo.filename) }}" 
+                                                alt="{{ photo.description or location.name }}">
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% endif %}
+                        
+                        <div class="approval-actions">
+                            <div class="action-buttons">
+                                <a href="{{ url_for('main.location_details', location_id=location.id) }}" class="btn secondary">
+                                    {{ _('View Details') }}
+                                </a>
+                                
+                                <form action="{{ url_for('admin.approve_location', location_id=location.id) }}" method="POST" class="inline-form">
+                                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                    <button type="submit" class="btn success">{{ _('Approve') }}</button>
+                                </form>
+                                
+                                <form action="{{ url_for('admin.reject_location', location_id=location.id) }}" method="POST" class="inline-form">
+                                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                    <button type="submit" class="btn danger">{{ _('Reject') }}</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="empty-state">
+                <p>{{ _('No locations pending approval.') }}</p>
+                <p>{{ _('Great job! You\'re all caught up.') }}</p>
+                <a href="{{ url_for('admin.index') }}" class="btn primary">{{ _('Back to Dashboard') }}</a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize small maps for each location
+        const mapElements = document.querySelectorAll('.small-map');
+        
+        mapElements.forEach(function(element) {
+            const lat = parseFloat(element.getAttribute('data-lat'));
+            const lng = parseFloat(element.getAttribute('data-lng'));
+            
+            if (lat && lng) {
+                const map = L.map(element, {
+                    center: [lat, lng],
+                    zoom: 15,
+                    zoomControl: false,
+                    dragging: false,
+                    scrollWheelZoom: false
+                });
+                
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                }).addTo(map);
+                
+                // Add marker
+                L.marker([lat, lng]).addTo(map);
+            }
+        });
+        
+        // Confirm rejection
+        const rejectForms = document.querySelectorAll('form[action*="reject_location"]');
+        
+        rejectForms.forEach(function(form) {
+            form.addEventListener('submit', function(event) {
+                if (!confirm("{{ _('Are you sure you want to reject this location? This will permanently delete it.') }}")) {
+                    event.preventDefault();
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

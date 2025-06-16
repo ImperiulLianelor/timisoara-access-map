@@ -1,0 +1,278 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="content-container location-details-page">
+    <div class="location-header">
+        <h1>{{ location.name }}</h1>
+        <p class="location-address">{{ location.address or _('No address provided') }}</p>
+        
+        <div class="location-meta">
+            <span class="location-type">{{ location.location_type|capitalize }}</span>
+            {% if not location.is_approved %}
+                <span class="pending-badge">{{ _('Pending Approval') }}</span>
+            {% endif %}
+        </div>
+    </div>
+    
+    <div class="location-content">
+        <div class="location-main">
+            <div class="location-section">
+                <h2>{{ _('Description') }}</h2>
+                <p>{{ location.description or _('No description provided') }}</p>
+            </div>
+            
+            <div class="location-section">
+                <h2>{{ _('Accessibility Features') }}</h2>
+                <ul class="features-list">
+                    <li class="{{ 'available' if location.has_ramp else 'unavailable' }}">
+                        <span class="feature-icon {{ 'wheelchair' if location.has_ramp else '' }}"></span>
+                        <span class="feature-name">{{ _('Wheelchair ramp') }}</span>
+                        <span class="feature-status">{{ _('Yes') if location.has_ramp else _('No') }}</span>
+                    </li>
+                    
+                    <li class="{{ 'available' if location.has_accessible_wc else 'unavailable' }}">
+                        <span class="feature-icon {{ 'wc' if location.has_accessible_wc else '' }}"></span>
+                        <span class="feature-name">{{ _('Accessible toilet') }}</span>
+                        <span class="feature-status">{{ _('Yes') if location.has_accessible_wc else _('No') }}</span>
+                    </li>
+                    
+                    <li class="{{ 'available' if location.has_accessible_parking else 'unavailable' }}">
+                        <span class="feature-icon {{ 'parking' if location.has_accessible_parking else '' }}"></span>
+                        <span class="feature-name">{{ _('Accessible parking') }}</span>
+                        <span class="feature-status">{{ _('Yes') if location.has_accessible_parking else _('No') }}</span>
+                    </li>
+                    
+                    <li class="{{ 'available' if location.has_accessible_entrance else 'unavailable' }}">
+                        <span class="feature-icon {{ 'entrance' if location.has_accessible_entrance else '' }}"></span>
+                        <span class="feature-name">{{ _('Accessible entrance') }}</span>
+                        <span class="feature-status">{{ _('Yes') if location.has_accessible_entrance else _('No') }}</span>
+                    </li>
+                    
+                    <li class="{{ 'available' if location.has_braille else 'unavailable' }}">
+                        <span class="feature-icon {{ 'braille' if location.has_braille else '' }}"></span>
+                        <span class="feature-name">{{ _('Braille signage') }}</span>
+                        <span class="feature-status">{{ _('Yes') if location.has_braille else _('No') }}</span>
+                    </li>
+                    
+                    <li class="{{ 'available' if location.has_audio_guidance else 'unavailable' }}">
+                        <span class="feature-icon {{ 'audio' if location.has_audio_guidance else '' }}"></span>
+                        <span class="feature-name">{{ _('Audio guidance') }}</span>
+                        <span class="feature-status">{{ _('Yes') if location.has_audio_guidance else _('No') }}</span>
+                    </li>
+                    
+                    <li class="{{ 'available' if location.has_staff_assistance else 'unavailable' }}">
+                        <span class="feature-icon {{ 'staff' if location.has_staff_assistance else '' }}"></span>
+                        <span class="feature-name">{{ _('Staff assistance') }}</span>
+                        <span class="feature-status">{{ _('Yes') if location.has_staff_assistance else _('No') }}</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="location-section">
+                <h2>{{ _('Photos') }}</h2>
+                {% if location.photos.count() > 0 %}
+                    <div class="photos-grid">
+                        {% for photo in location.photos %}
+                            <div class="photo-item">
+                                <img src="{{ url_for('static', filename='uploads/' + photo.filename) }}" 
+                                     alt="{{ photo.description or location.name }}" 
+                                     loading="lazy">
+                                {% if photo.description %}
+                                    <div class="photo-description">{{ photo.description }}</div>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p>{{ _('No photos available for this location.') }}</p>
+                {% endif %}
+            </div>
+            
+            <div class="location-section" id="reviews">
+                <h2>{{ _('Reviews') }}</h2>
+                
+                {% if reviews %}
+                    <div class="reviews-list">
+                        {% for review in reviews %}
+                            <div class="review-item">
+                                <div class="review-header">
+                                    <div class="review-author">{{ review.author.username }}</div>
+                                    <div class="review-rating">
+                                        {% for i in range(5) %}
+                                            {% if i < review.rating %}
+                                                <span class="star filled">★</span>
+                                            {% else %}
+                                                <span class="star">☆</span>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                    <div class="review-date">{{ review.created_at.strftime('%d %b %Y') }}</div>
+                                </div>
+                                <div class="review-content">
+                                    {{ review.content }}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p>{{ _('No reviews yet. Be the first to review this location!') }}</p>
+                {% endif %}
+                
+                {% if current_user.is_authenticated and location.is_approved %}
+                    <div class="add-review">
+                        <h3>{{ _('Add Your Review') }}</h3>
+                        <form action="{{ url_for('main.add_review', location_id=location.id) }}" method="POST">
+                            {{ csrf_token() }}
+                            
+                            <div class="form-group">
+                                <label for="rating">{{ _('Rating') }}</label>
+                                <div class="rating-input">
+                                    {% for i in range(1, 6) %}
+                                        <input type="radio" id="star{{ i }}" name="rating" value="{{ i }}" required>
+                                        <label for="star{{ i }}" title="{{ i }} {{ _('stars') }}">☆</label>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="content">{{ _('Your Review') }}</label>
+                                <textarea name="content" id="content" rows="4" required></textarea>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="submit" class="btn primary">{{ _('Submit Review') }}</button>
+                            </div>
+                        </form>
+                    </div>
+                {% elif not current_user.is_authenticated %}
+                    <div class="login-prompt">
+                        <p>{{ _('Please') }} <a href="{{ url_for('auth.login') }}">{{ _('log in') }}</a> {{ _('to add a review.') }}</p>
+                    </div>
+                {% elif not location.is_approved %}
+                    <div class="notice">
+                        <p>{{ _('Reviews can only be added once this location has been approved.') }}</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        
+        <div class="location-sidebar">
+            <div class="map-container">
+                <div id="location-map"></div>
+            </div>
+            
+            <div class="location-actions">
+                <button id="directions-btn" class="btn primary full-width">
+                    {{ _('Get Directions') }}
+                </button>
+                
+                {% if current_user.is_authenticated and current_user.id == location.user_id %}
+                    <div class="owner-actions">
+                        <a href="#" class="btn secondary">{{ _('Edit Location') }}</a>
+                    </div>
+                {% endif %}
+                
+                {% if current_user.is_admin %}
+                    <div class="admin-actions">
+                        {% if not location.is_approved %}
+                            <form action="{{ url_for('admin.approve_location', location_id=location.id) }}" method="POST" class="inline-form">
+                                {{ csrf_token() }}
+                                <button type="submit" class="btn success">{{ _('Approve') }}</button>
+                            </form>
+                            
+                            <form action="{{ url_for('admin.reject_location', location_id=location.id) }}" method="POST" class="inline-form">
+                                {{ csrf_token() }}
+                                <button type="submit" class="btn danger">{{ _('Reject') }}</button>
+                            </form>
+                        {% else %}
+                            <a href="{{ url_for('admin.edit_location', location_id=location.id) }}" class="btn secondary">
+                                {{ _('Edit as Admin') }}
+                            </a>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize location map
+        const mapElement = document.getElementById('location-map');
+        if (mapElement) {
+            const map = L.map(mapElement, {
+                center: [{{ location.lat }}, {{ location.lng }}],
+                zoom: 16,
+                scrollWheelZoom: false
+            });
+            
+            // Add OpenStreetMap tiles
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                maxZoom: 19
+            }).addTo(map);
+            
+            // Add marker for the location
+            const marker = L.marker([{{ location.lat }}, {{ location.lng }}]).addTo(map);
+            
+            // Enable scroll zoom when map is clicked/focused
+            map.on('focus', function() {
+                map.scrollWheelZoom.enable();
+            });
+            
+            // Disable scroll zoom when mouse leaves the map
+            map.on('blur', function() {
+                map.scrollWheelZoom.disable();
+            });
+            
+            // Get directions button
+            const directionsBtn = document.getElementById('directions-btn');
+            if (directionsBtn) {
+                directionsBtn.addEventListener('click', function() {
+                    // Check if we can get user's location
+                    if (navigator.geolocation) {
+                        navigator.geolocation.getCurrentPosition(
+                            function(position) {
+                                // Open directions in Google Maps
+                                const url = `https://www.google.com/maps/dir/${position.coords.latitude},${position.coords.longitude}/${location.lat},${location.lng}`;
+                                window.open(url, '_blank');
+                            },
+                            function(error) {
+                                // If location access denied, just open the destination
+                                const url = `https://www.google.com/maps/dir/?api=1&destination=${location.lat},${location.lng}`;
+                                window.open(url, '_blank');
+                            }
+                        );
+                    } else {
+                        // Fallback if geolocation not supported
+                        const url = `https://www.google.com/maps/dir/?api=1&destination=${location.lat},${location.lng}`;
+                        window.open(url, '_blank');
+                    }
+                });
+            }
+        }
+        
+        // Initialize star rating system
+        const ratingInputs = document.querySelectorAll('.rating-input input');
+        if (ratingInputs.length > 0) {
+            ratingInputs.forEach(input => {
+                input.addEventListener('change', function() {
+                    // Clear all selected stars
+                    document.querySelectorAll('.rating-input label').forEach(label => {
+                        label.classList.remove('selected');
+                    });
+                    
+                    // Highlight selected stars
+                    const rating = parseInt(this.value);
+                    for (let i = 1; i <= rating; i++) {
+                        document.querySelector(`label[for="star${i}"]`).classList.add('selected');
+                    }
+                });
+            });
+        }
+    });
+</script>
+{% endblock %}

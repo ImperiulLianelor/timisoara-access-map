@@ -1,0 +1,58 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.Python
+pip-log.txt
+pip-delete-this-directory.txt
+# Environments
+
+.venv
+venv/
+env/
+ENV/
+# SQLite databases
+*.sqlite3
+app.db # Your default development database name
+production.db # Your default production database name (if different and local)
+# Flask session files (if using filesystem session)
+instance/flask_session/
+# Flask-Migrate
+migrations/ # Often good to commit, but can be ignored if always run fresh
+            # If you commit it, remove this line. If it's large or DB specific, ignore.
+# IDE / Editor specific
+.vscode/
+.idea/
+*.swp
+*.swo
+# macOS
+.DS_Store
+# Build artifacts
+dist/
+build/
+*.egg
+# Static files that are generated or very large (optional)
+# If your app/static/uploads will contain many large user files,
+# you might ignore the content but keep the directory structure.
+app/static/uploads/*
+!app/static/uploads/.gitkeep # Use this if you want to keep the empty dir in git
+# Logs
+*.log
+logs/
+# Babel / Gettext
+app/translations/*/LC_MESSAGES/*.mo 
+# messages.pot # Optional: some commit this as the source template
+# If you prefer to regenerate .po files from .pot instead of versioning them fully:
+# app/translations/*/LC_MESSAGES/*.po 
+# But often, .po files ARE committed to track translation progress.
+# So, typically, only ignore .mo files.
+# Credentials and sensitive files
+credentials.json
+secrets.yaml
+# Test coverage reports
+.coverage
+htmlcov/
+# IPython
+profile_default/
+ipython_config.py

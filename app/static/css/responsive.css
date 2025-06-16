@@ -1,0 +1,227 @@
+/**
+ * Timisoara Accessibility Map
+ * Responsive styles
+ */
+
+/* Medium screens (tablets) */
+@media screen and (max-width: 992px) {
+    :root {
+        --sidebar-width: 280px;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Small screens (mobile landscape) */
+@media screen and (max-width: 768px) {
+    :root {
+        --sidebar-width: 100%;
+        --header-height: 50px;
+    }
+    
+    /* Mobile navigation */
+    .menu-toggle {
+        display: block;
+    }
+    
+    .nav-menu {
+        position: absolute;
+        flex-direction: column;
+        top: var(--header-height);
+        left: 0;
+        right: 0;
+        background-color: var(--header-color);
+        padding: var(--space-4);
+        display: none;
+        box-shadow: 0 4px 6px var(--shadow-color);
+    }
+    
+    .nav-menu.open {
+        display: flex;
+    }
+    
+    .nav-menu li {
+        margin: var(--space-3) 0;
+        margin-left: 0;
+    }
+    
+    /* Control sidebar in mobile view */
+    .controls-sidebar {
+        transform: translateX(-100%);
+        transition: transform var(--transition-speed);
+    }
+    
+    .controls-sidebar.open {
+        transform: translateX(0);
+    }
+    
+    /* Add a toggle button for controls sidebar */
+    .map-container::before {
+        content: "☰";
+        position: absolute;
+        top: var(--space-3);
+        left: var(--space-3);
+        width: 40px;
+        height: 40px;
+        background-color: white;
+        border-radius: 4px;
+        z-index: 15;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 2px 4px var(--shadow-color);
+        cursor: pointer;
+        font-size: var(--text-xl);
+    }
+    
+    /* Filter buttons */
+    .filter-buttons {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    /* Form actions */
+    .form-actions {
+        flex-direction: column;
+    }
+    
+    .form-actions button {
+        width: 100%;
+        margin-bottom: var(--space-3);
+    }
+    
+    /* Footer */
+    .footer-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Extra small screens (mobile portrait) */
+@media screen and (max-width: 480px) {
+    .type-filters {
+        grid-template-columns: 1fr;
+    }
+    
+    .checkbox-group {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Location details */
+    .location-photos {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    /* Review header */
+    .review-header {
+        flex-direction: column;
+    }
+    
+    .review-rating {
+        margin-left: 0;
+        margin-top: var(--space-1);
+        margin-bottom: var(--space-1);
+    }
+    
+    /* Notifications */
+    #notification-container {
+        right: var(--space-3);
+        left: var(--space-3);
+        bottom: var(--space-3);
+    }
+    
+    .notification {
+        min-width: auto;
+        max-width: none;
+        width: 100%;
+    }
+}
+
+/* ===== Accessibility Enhancements ===== */
+@media screen and (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+    }
+}
+
+/* High contrast mode can be toggled via JavaScript */
+@media (prefers-color-scheme: dark) {
+    body:not(.high-contrast-override) {
+        --bg-color: #121212;
+        --text-color: #f0f0f0;
+        --border-color: #444;
+        --shadow-color: rgba(0, 0, 0, 0.5);
+    }
+}
+
+/* Large font size for users who need it */
+.large-text {
+    --text-xs: 0.875rem;   /* 14px */
+    --text-sm: 1rem;       /* 16px */
+    --text-base: 1.125rem; /* 18px */
+    --text-lg: 1.25rem;    /* 20px */
+    --text-xl: 1.5rem;     /* 24px */
+    --text-2xl: 1.75rem;   /* 28px */
+}
+
+/* Extra large font size */
+.xl-text {
+    --text-xs: 1rem;       /* 16px */
+    --text-sm: 1.125rem;   /* 18px */
+    --text-base: 1.25rem;  /* 20px */
+    --text-lg: 1.5rem;     /* 24px */
+    --text-xl: 1.75rem;    /* 28px */
+    --text-2xl: 2rem;      /* 32px */
+}
+
+/* Focus styles for accessibility */
+:focus {
+    outline: 3px solid var(--button-color);
+    outline-offset: 2px;
+}
+
+/* Focus styles in high contrast mode */
+.high-contrast :focus {
+    outline: 3px solid var(--light-text);
+}
+
+/* ===== Print Styles ===== */
+@media print {
+    .main-header,
+    .main-footer,
+    .controls-sidebar,
+    .search-container,
+    .filter-section,
+    #notification-container,
+    .flash-messages,
+    .close-sidebar,
+    .close-btn,
+    .form-sidebar {
+        display: none !important;
+    }
+    
+    .map-container {
+        height: auto;
+    }
+    
+    #map {
+        height: 400px;
+        page-break-after: always;
+    }
+    
+    .details-sidebar {
+        position: static;
+        width: 100%;
+        transform: none;
+        box-shadow: none;
+        border: 1px solid #ddd;
+        padding: 20px;
+        margin-top: 20px;
+    }
+    
+    a[href]:after {
+        content: " (" attr(href) ")";
+    }
+}

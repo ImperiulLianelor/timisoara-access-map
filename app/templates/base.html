@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="{{ session.get('language', 'ro') }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% if title %}{{ title }} - {% endif %}{{ _('Timisoara Accessibility Map') }}</title>
+    
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin=""/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}">
+    
+    <!-- JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+    
+    <!-- ARIA enhancements -->
+    <script>
+        document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+    </script>
+</head>
+<body>
+    <!-- Skip to content link for accessibility -->
+    <a href="#main-content" class="skip-link">{{ _('Skip to content') }}</a>
+    
+    <!-- Header -->
+    <header class="main-header">
+        <div class="container">
+            <div class="logo">
+                <a href="{{ url_for('main.index') }}" aria-label="{{ _('Timisoara Accessibility Map Homepage') }}">
+                    <span class="logo-text">{{ _('Timisoara Accessibility') }}</span>
+                </a>
+            </div>
+            
+            <nav class="main-nav">
+                <button class="menu-toggle" aria-expanded="false" aria-controls="main-menu">
+                    <span class="sr-only">{{ _('Menu') }}</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                
+                <ul id="main-menu" class="nav-menu">
+                    <li><a href="{{ url_for('main.index') }}">{{ _('Map') }}</a></li>
+                    {% if current_user.is_authenticated %}
+                        <li><a href="{{ url_for('main.dashboard') }}">{{ _('Dashboard') }}</a></li>
+                        <li><a href="{{ url_for('main.profile') }}">{{ _('Profile') }}</a></li>
+                        {% if current_user.is_admin %}
+                            <li><a href="{{ url_for('admin.index') }}">{{ _('Admin') }}</a></li>
+                        {% endif %}
+                        <li><a href="{{ url_for('auth.logout') }}">{{ _('Logout') }}</a></li>
+                    {% else %}
+                        <li><a href="{{ url_for('auth.login') }}">{{ _('Login') }}</a></li>
+                        <li><a href="{{ url_for('auth.register') }}">{{ _('Register') }}</a></li>
+                    {% endif %}
+                    
+                    <!-- Language toggle -->
+                    <li class="language-toggle">
+                        {% if session.get('language') == 'en' %}
+                            <a href="{{ url_for('auth.set_language', language='ro') }}" aria-label="{{ _('Switch to Romanian') }}">RO</a>
+                        {% else %}
+                            <a href="{{ url_for('auth.set_language', language='en') }}" aria-label="{{ _('Switch to English') }}">EN</a>
+                        {% endif %}
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Main content -->
+    <main id="main-content">
+        <!-- Flash messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages" role="alert" aria-live="polite">
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">
+                            <div class="container">
+                               <button type="button" class="close-alert" aria-label="{{ _('Close') }}">&times;</button>
+                                {{ message }}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        
+        <!-- Page content -->
+        {% block content %}{% endblock %}
+    </main>
+    
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <h3>{{ _('Timisoara Accessibility Map') }}</h3>
+                    <p>{{ _('Helping people find accessible locations in Timisoara.') }}</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>{{ _('Quick Links') }}</h4>
+                    <ul>
+                        <li><a href="{{ url_for('main.index') }}">{{ _('Map') }}</a></li>
+                        <li><a href="#">{{ _('About') }}</a></li>
+                        <li><a href="#">{{ _('Accessibility Guide') }}</a></li>
+                        <li><a href="#">{{ _('Contact') }}</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-accessibility">
+                    <h4>{{ _('Accessibility') }}</h4>
+                    <p>{{ _('This website is designed to be accessible for all users, including those with disabilities.') }}</p>
+                    <button class="btn secondary toggle-high-contrast">{{ _('Toggle High Contrast') }}</button>
+                    <button class="btn secondary increase-text-size">A+</button>
+                    <button class="btn secondary decrease-text-size">A-</button>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; {{ current_year }} {{ _('Timisoara Accessibility Map. All rights reserved.') }}</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Notification container -->
+    <div id="notification-container" aria-live="polite"></div>
+    
+    <!-- JavaScript -->
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html> 
