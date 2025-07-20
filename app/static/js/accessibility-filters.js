@@ -120,14 +120,8 @@ class AccessibilityFilters {
         
         // Update checkbox label
         const label = checkbox.closest('.checkbox-label');
-        if (label) {
-            if (isChecked) {
-                label.classList.add('active');
-            } else {
-                label.classList.remove('active');
-            }
-        }
-        
+        label?.classList.toggle('active', isChecked);
+    
         // Update filters state
         if (isChecked) {
             if (!this.filters.locationTypes.includes(locationType)) {

@@ -154,6 +154,80 @@
         --border-color: #444;
         --shadow-color: rgba(0, 0, 0, 0.5);
     }
+    body:not(.high-contrast-override) .admin-panel,
+body:not(.high-contrast-override) .admin-filters,
+body:not(.high-contrast-override) .data-table-container,
+body:not(.high-contrast-override) .add-review,
+body:not(.high-contrast-override) .dashboard-section,
+body:not(.high-contrast-override) .user-profile-card,
+body:not(.high-contrast-override) .stats-card,
+body:not(.high-contrast-override) .profile-sidebar,
+body:not(.high-contrast-override) .profile-section,
+body:not(.high-contrast-override) .location-card,
+body:not(.high-contrast-override) .review-card,
+body:not(.high-contrast-override) .review-card-header,
+body:not(.high-contrast-override) .filter-btn,
+body:not(.high-contrast-override) .search-results {
+    background-color: #1e1e1e;
+    border-color: #555;
+    color: #999797;
+}
+
+/* Form Inputs */
+body:not(.high-contrast-override) input[type="text"],
+body:not(.high-contrast-override) input[type="email"],
+body:not(.high-contrast-override) input[type="password"],
+body:not(.high-contrast-override) select,
+body:not(.high-contrast-override) textarea {
+    background-color: #333;
+    color: #999797;
+    border-color: #555;
+}
+
+/* Tables */
+body:not(.high-contrast-override) .data-table th,
+body:not(.high-contrast-override) .locations-table th {
+    background-color: #2a2a2a;
+    color: #f0f0f0;
+}
+body:not(.high-contrast-override) .data-table tr:hover,
+body:not(.high-contrast-override) .locations-table tr:hover {
+    background-color: #2a2a2a;
+}
+
+/* Borders between elements */
+body:not(.high-contrast-override) .section-header,
+body:not(.high-contrast-override) .user-preferences h4,
+body:not(.high-contrast-override) .location-card-footer,
+body:not(.high-contrast-override) .review-card-footer,
+body:not(.high-contrast-override) .profile-stats {
+    border-color: #555;
+}
+
+/* Specific text elements that need color correction */
+body:not(.high-contrast-override) .page-header h1,
+body:not(.high-contrast-override) .section-header h2,
+body:not(.high-contrast-override) .user-details h3,
+body:not(.high-contrast-override) .stat-value,
+body:not(.high-contrast-override) .review-card-header h3 {
+    color: #999797;
+}
+
+body:not(.high-contrast-override) .welcome-message,
+body:not(.high-contrast-override) .lead,
+body:not(.high-contrast-override) .location-address,
+body:not(.high-contrast-override) .user-email,
+body:not(.high-contrast-override) .join-date,
+body:not(.high-contrast-override) .stat-label,
+body:not(.high-contrast-override) .stat-desc,
+body:not(.high-contrast-override) .review-date,
+body:not(.high-contrast-override) .review-text,
+body:not(.high-contrast-override) .log-details,
+body:not(.high-contrast-override) .current-user-note,
+body:not(.high-contrast-override) .unavailable .feature-status,
+body:not(.high-contrast-override) .info-meta {
+    color: #999797;
+}
 }
 
 /* Large font size for users who need it */

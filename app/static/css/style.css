@@ -7,7 +7,7 @@
 :root {
     /* Color palette */
     --bg-color: #D9D4D7;
-    --header-color: #2B3242;
+    --header-color: #354363;
     --button-color: #755047;
     --button-hover: #5E4037;
     --text-color: #333;
@@ -22,7 +22,7 @@
     /* Accessibility feature colors */
     --wheelchair-color: #4285F4;
     --visual-color: #EA4335;
-    --hearing-color: #FBBC05;
+    --hearing-color: #fbbd05af;
     --cognitive-color: #34A853;
     
     /* Dimensions */
@@ -52,10 +52,10 @@
 }
 
 /* ===== High Contrast Theme ===== */
-.high-contrast {
+html[lang] body.high-contrast {
     --bg-color: #000;
     --header-color: #fff;
-    --button-color: #ffff00;
+    --button-color: #ff00ea;
     --button-hover: #ffcc00;
     --text-color: #fff;
     --light-text: #000;
@@ -374,33 +374,98 @@ main {
 
 /* Icon styles */
 .filter-icon.wheelchair,
-.legend-icon.wheelchair {
+.legend-icon.wheelchair,
+.location-marker.wheelchair .marker-icon {
     background-color: var(--wheelchair-color);
     border-radius: 50%;
 }
 
 .filter-icon.visual,
-.legend-icon.visual {
+.legend-icon.visual,
+.location-marker.visual .marker-icon {
     background-color: var(--visual-color);
     border-radius: 50%;
 }
 
 .filter-icon.hearing,
-.legend-icon.hearing {
+.legend-icon.hearing,
+.location-marker.hearing .marker-icon {
     background-color: var(--hearing-color);
     border-radius: 50%;
 }
 
 .filter-icon.cognitive,
-.legend-icon.cognitive {
+.legend-icon.cognitive,
+.location-marker.cognitive .marker-icon {
     background-color: var(--cognitive-color);
     border-radius: 50%;
 }
 
-.legend-icon.pending {
+.legend-icon.pending,
+.location-marker.pending .marker-icon {
     border: 2px dashed #888;
     border-radius: 50%;
+    background-color: #f0f0f0;
 }
+
+.location-marker.marker .marker-icon {
+    background-color: #808080; /* Neutral grey for markers with no specific category */
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+
+/* Overrides for specific accessibility types */
+.location-marker.wheelchair .marker-icon {
+    background-color: var(--wheelchair-color);
+}
+.location-marker.visual .marker-icon {
+    background-color: var(--visual-color);
+}
+.location-marker.hearing .marker-icon {
+    background-color: var(--hearing-color);
+}
+.location-marker.cognitive .marker-icon {
+    background-color: var(--cognitive-color);
+}
+.location-marker.wheelchair.visual .marker-icon {
+    background: linear-gradient(
+        135deg,
+        var(--wheelchair-color) 0%,
+        var(--wheelchair-color) 50%,
+        var(--visual-color) 50%,
+        var(--visual-color) 100%
+    );
+}
+.location-marker.wheelchair.cognitive .marker-icon {
+    background: linear-gradient(
+        135deg,
+        var(--wheelchair-color) 0%,
+        var(--wheelchair-color) 50%,
+        var(--cognitive-color) 50%,
+        var(--cognitive-color) 100%
+    );
+}
+.location-marker.visual.cognitive .marker-icon {
+    background: linear-gradient(
+       135deg,
+       var(--visual-color) 0%,
+       var(--visual-color) 50%,
+       var(--cognitive-color) 50%,
+       var(--cognitive-color) 100%
+   );
+}
+
+.location-marker.fully-accessible .marker-icon {
+    background: conic-gradient(
+        var(--wheelchair-color) 0deg 90deg,
+        var(--visual-color) 90deg 180deg,
+        var(--cognitive-color) 180deg 270deg,
+        var(--hearing-color) 270deg 360deg
+    );
+}
+
+
 
 /* Type filters */
 .type-filters {
@@ -417,6 +482,11 @@ main {
 
 .checkbox-label input {
     margin-right: var(--space-2);
+}
+
+.checkbox-label.active {
+    font-weight: bold;
+    color: var(--button-color);
 }
 
 /* ===== Legend ===== */
@@ -669,6 +739,10 @@ input[type="file"] {
     border-radius: 4px;
     cursor: pointer;
     font-size: var(--text-xs);
+    font-family: inherit;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
 }
 
 /* Selection marker for adding locations */
@@ -1389,7 +1463,7 @@ input[type="file"] {
     height: 64px;
     border-radius: 50%;
     background-color: var(--header-color);
-    color: white;
+    color: var(--light-text);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1552,7 +1626,7 @@ input[type="file"] {
 .admin-badge {
     display: inline-block;
     background-color: var(--header-color);
-    color: white;
+    color: var(--light-text);
     padding: var(--space-1) var(--space-3);
     border-radius: 16px;
     font-size: var(--text-xs);
@@ -1670,23 +1744,6 @@ input[type="file"] {
     }
 }
 
-/* High contrast adjustments */
-.high-contrast .dashboard-section,
-.high-contrast .user-profile-card,
-.high-contrast .stats-card,
-.high-contrast .profile-sidebar,
-.high-contrast .profile-section,
-.high-contrast .location-card,
-.high-contrast .review-card {
-    background-color: black;
-    border: 1px solid white;
-}
-
-.high-contrast .section-header,
-.high-contrast .user-preferences h4 {
-    border-bottom-color: white;
-}
-
 /* ===== Admin Pages ===== */
 .admin-dashboard {
     padding-top: var(--space-4);
@@ -1710,7 +1767,7 @@ input[type="file"] {
 
 .stat-card-header {
     background-color: var(--header-color);
-    color: white;
+    color: var(--light-text);
     padding: var(--space-3);
     text-align: center;
 }
@@ -2418,43 +2475,155 @@ input[type="file"] {
     }
 }
 
-/* High contrast mode */
+/* 
+ * =================================
+ * High Contrast Mode Overrides
+ * =================================
+ */
+
+/* Main element backgrounds and borders */
 .high-contrast .stat-card,
 .high-contrast .admin-panel,
 .high-contrast .admin-filters,
 .high-contrast .data-table-container,
 .high-contrast .approval-card,
 .high-contrast .edit-form-container,
-.high-contrast .modal-content {
+.high-contrast .modal-content,
+.high-contrast .dashboard-section,
+.high-contrast .user-profile-card,
+.high-contrast .stats-card,
+.high-contrast .profile-sidebar,
+.high-contrast .profile-section,
+.high-contrast .location-card,
+.high-contrast .review-card {
     background-color: black;
     border: 1px solid white;
 }
 
-.high-contrast .stat-card-header,
+/* Header and footer styling */
+.high-contrast .main-header,
+.high-contrast .main-footer {
+    background-color: white;
+    color: black;
+}
+.high-contrast .main-header a,
+.high-contrast .main-footer a,
+.high-contrast .main-footer h3,
+.high-contrast .main-footer h4,
+.high-contrast .main-footer p {
+    color: black;
+}
+.high-contrast .language-toggle a {
+    border-color: black;
+}
+.high-contrast .copyright {
+    border-top-color: rgba(0, 0, 0, 0.2);
+}
+
+/* Headers and borders within cards */
 .high-contrast .stat-card-footer,
 .high-contrast .panel-header,
 .high-contrast .panel-footer,
 .high-contrast .approval-header,
 .high-contrast .approval-actions,
 .high-contrast .modal-header,
-.high-contrast .modal-footer {
+.high-contrast .modal-footer,
+.high-contrast .section-header,
+.high-contrast .user-preferences h4,
+.high-contrast .location-card-footer,
+.high-contrast .review-card-footer,
+.high-contrast .profile-stats {
     border-color: white;
 }
 
+/* Tables */
 .high-contrast .data-table th,
 .high-contrast .data-table td {
     border-color: white;
 }
-
 .high-contrast .data-table th {
     background-color: #333;
+    color: white;
 }
-
-.high-contrast .log-extra {
+.high-contrast .data-table tr:hover {
     background-color: #333;
 }
 
+/* Special background colors for specific elements */
+.high-contrast .log-extra,
+.high-contrast .review-card-header,
+.high-contrast .add-review {
+    background-color: #333;
+}
 .high-contrast .role.user {
     background-color: #333;
     color: white;
+}
+.high-contrast .location-card-header {
+    background-color: #444; /* Differentiate from pure black */
+}
+.high-contrast .location-type {
+    background-color: #444;
+    color: white;
+}
+
+/* Form elements */
+.high-contrast input,
+.high-contrast textarea,
+.high-contrast select {
+    background-color: #222;
+    color: white;
+    border-color: white;
+}
+.high-contrast .filter-btn {
+    background-color: black;
+    border-color: white;
+    color: white;
+}
+.high-contrast .filter-btn.active {
+    background-color: var(--button-color);
+    color: var(--light-text);
+}
+
+/* Buttons */
+.high-contrast .btn.primary {
+    color: var(--light-text);
+}
+.high-contrast .btn.secondary {
+    color: var(--button-color);
+    border-color: var(--button-color);
+}
+.high-contrast .btn.text {
+    color: var(--button-color);
+}
+
+/* Specific text color fixes */
+.high-contrast .close-sidebar,
+.high-contrast .close-btn {
+    color: white;
+}
+.high-contrast .lead,
+.high-contrast .welcome-message,
+.high-contrast .location-address,
+.high-contrast .user-email,
+.high-contrast .join-date,
+.high-contrast .stat-desc,
+.high-contrast .stat-label,
+.high-contrast .review-date,
+.high-contrast .log-details,
+.high-contrast .no-data {
+    color: #ccc; 
+}
+
+.high-contrast .stat-value,
+.high-contrast .user-details h3,
+.high-contrast .location-type,
+.high-contrast .section-header h2,
+.high-contrast .page-header h1,
+.high-contrast .review-card-header h3 {
+    color: white;
+}
+
+.high-contrast .review-text {
+    color: #eee;
 }

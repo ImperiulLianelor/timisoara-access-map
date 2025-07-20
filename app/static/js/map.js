@@ -3,7 +3,7 @@
  * Main map functionality for the accessibility web app
  */
 
-class AccessibilityMap {
+ class AccessibilityMap {
     constructor(mapElementId, options = {}) {
         // Default options
         this.options = {
@@ -50,7 +50,7 @@ class AccessibilityMap {
 
         // Add OpenStreetMap tiles
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
             maxZoom: 19
         }).addTo(this.map);
 
@@ -89,7 +89,7 @@ class AccessibilityMap {
             this.selectionMarker.setLatLng(this.map.getCenter());
         });
 
-        // Add click handler to add new location
+        // This click handler is now ONLY for adding new locations
         this.map.on('click', (e) => {
             if (document.getElementById('add-location-btn')) {
                 this.map.setView(e.latlng);
@@ -208,7 +208,6 @@ class AccessibilityMap {
      * Create a marker for a location
      */
     createLocationMarker(location) {
-        // Determine marker icon based on accessibility features
         const iconClass = this.getMarkerIconClass(location);
         
         const marker = L.marker([location.lat, location.lng], {
@@ -221,12 +220,25 @@ class AccessibilityMap {
             })
         });
         
-        // Add popup with basic info
+        // Bind the popup content
         marker.bindPopup(this.createPopupContent(location));
-        
-        // Add click handler
-        marker.on('click', () => {
-            this.showLocationDetails(location.id);
+
+        // **THE FIX:** Add a listener for when this popup opens
+        marker.on('popupopen', (e) => {
+            const popupElement = e.popup.getElement();
+            const btn = popupElement.querySelector('.details-btn');
+            if (btn) {
+                // This is crucial to prevent the map from handling the click and closing the popup
+                L.DomEvent.on(btn, 'click', L.DomEvent.stop);
+                
+                // Now, add our own click listener to the button
+                L.DomEvent.on(btn, 'click', () => {
+                    const locationId = btn.dataset.locationId;
+                    if (locationId) {
+                        this.showLocationDetails(parseInt(locationId, 10));
+                    }
+                });
+            }
         });
         
         return marker;
@@ -235,15 +247,24 @@ class AccessibilityMap {
     /**
      * Get the appropriate marker icon class based on accessibility features
      */
-    getMarkerIconClass(location) {
+    
+     getMarkerIconClass(location) {
         const classes = ['marker'];
         
-        if (location.has_ramp && location.has_accessible_entrance) {
-            classes.push('wheelchair');
-        }
+        const isWheelchair = location.has_ramp || location.has_accessible_entrance || location.has_accessible_parking;
+        const isVisual = location.has_braille || location.has_audio_guidance;
+        const isCognitive = location.has_staff_assistance;
+        const isHearing = location.has_audio_guidance; // Note: You might want a different flag for this
         
-        if (location.has_braille || location.has_audio_guidance) {
-            classes.push('visual');
+        // Check for the special "fully accessible" case first
+        if (isWheelchair && isVisual && isCognitive && isHearing) {
+            classes.push('fully-accessible');
+        } else {
+            // Otherwise, add individual classes
+            if (isWheelchair) classes.push('wheelchair');
+            if (isVisual) classes.push('visual');
+            if (isCognitive) classes.push('cognitive');
+            if (isHearing) classes.push('hearing');
         }
         
         if (!location.is_approved) {
@@ -257,7 +278,7 @@ class AccessibilityMap {
      * Create popup content for a location marker
      */
     createPopupContent(location) {
-        return `
+        const content = `
             <div class="marker-popup">
                 <h3>${location.name}</h3>
                 <p>${location.address || ''}</p>
@@ -266,9 +287,10 @@ class AccessibilityMap {
                     ${location.has_accessible_wc ? '<span class="icon wc" title="Accessible toilet"></span>' : ''}
                     ${location.has_braille ? '<span class="icon braille" title="Braille available"></span>' : ''}
                 </div>
-                <button class="details-btn" onclick="map.showLocationDetails(${location.id})">View Details</button>
+                <button class="details-btn" data-location-id="${location.id}">View Details</button>
             </div>
         `;
+        return content;
     }
 
     /**
@@ -334,7 +356,7 @@ class AccessibilityMap {
 
         return `
             <div class="location-details-container">
-                <button id="close-details" class="close-btn" aria-label="Close details">&times;</button>
+                <button id="close-details" class="close-btn" aria-label="Close details">×</button>
                 <h2>${location.name}</h2>
                 <p class="address">${location.address || 'No address provided'}</p>
                 
@@ -478,7 +500,7 @@ class AccessibilityMap {
         notification.className = `notification ${type}`;
         notification.innerHTML = `
             <span class="message">${message}</span>
-            <button class="close-notification">&times;</button>
+            <button class="close-notification">×</button>
         `;
         
         notificationContainer.appendChild(notification);

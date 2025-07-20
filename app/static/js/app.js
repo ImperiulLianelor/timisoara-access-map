@@ -6,7 +6,7 @@
 /**
  * Main application class
  */
-class AccessibilityApp {
+ class AccessibilityApp {
     constructor() {
         // App state
         this.state = {
@@ -84,7 +84,7 @@ class AccessibilityApp {
             // Add a close button to the sidebar
             const closeButton = document.createElement('button');
             closeButton.className = 'close-sidebar';
-            closeButton.innerHTML = '&times;';
+            closeButton.innerHTML = '×';
             closeButton.setAttribute('aria-label', 'Close filters sidebar');
             
             controlsSidebar.appendChild(closeButton);
@@ -216,11 +216,11 @@ class AccessibilityApp {
     toggleHighContrast() {
         this.state.highContrast = !this.state.highContrast;
         
-        // Apply high contrast class to body
         document.body.classList.toggle('high-contrast', this.state.highContrast);
         
-        // Add override class to prevent system preferences from conflicting
-        document.body.classList.add('high-contrast-override');
+        // Add override class ONLY when high contrast is active to prevent system preferences from conflicting.
+        // Remove it when high contrast is turned off.
+        document.body.classList.toggle('high-contrast-override', this.state.highContrast);
         
         // Save preference
         this.savePreferences();
@@ -351,7 +351,7 @@ class AccessibilityApp {
         notification.className = `notification ${type}`;
         notification.innerHTML = `
             <span class="message">${message}</span>
-            <button class="close-notification" aria-label="Close notification">&times;</button>
+            <button class="close-notification" aria-label="Close notification">×</button>
         `;
         
         // Make it accessible
